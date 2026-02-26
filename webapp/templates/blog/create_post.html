@@ -1,0 +1,209 @@
+{% extends "blog/blog_base.html" %}
+{% load static %}
+
+{% block title %}Create New Post{% endblock %}
+
+{% block blog_content %}
+
+<div class="container mx-auto px-6 py-10">
+    <div class="max-w-6xl mx-auto">
+
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-10">
+            <div>
+                <h1 class="text-4xl font-bold text-purple-600">
+                    📝 Create New Post
+                </h1>
+                <p class="text-gray-600 mt-2">
+                    Share your insights with the world
+                </p>
+            </div>
+
+            <a href="{% url 'blog_dashboard' %}"
+                class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg transition">
+                ← Back to Dashboard
+            </a>
+        </div>
+
+        <!-- Form Card -->
+        <div class="bg-white shadow-xl rounded-2xl p-8 border border-gray-100">
+
+            <form method="post" enctype="multipart/form-data" class="space-y-10">
+                {% csrf_token %}
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+                    <!-- LEFT COLUMN -->
+                    <div class="lg:col-span-2 space-y-8">
+
+                        <!-- Title -->
+                        <div>
+                            <label class="block font-semibold mb-2">
+                                📝 Post Title <span class="text-red-500">*</span>
+                            </label>
+                            {{ form.title }}
+                            <p class="text-xs text-gray-500 mt-1">
+                                Keep under 60 characters for SEO.
+                            </p>
+                            {% if form.title.errors %}
+                            <p class="text-red-600 text-sm mt-1">
+                                {{ form.title.errors }}
+                            </p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Short Description -->
+                        <div>
+                            <label class="block font-semibold mb-2">
+                                📄 Short Description <span class="text-red-500">*</span>
+                            </label>
+                            {{ form.short_description }}
+                            <p class="text-xs text-gray-500 mt-1">
+                                Recommended: 120–160 characters.
+                            </p>
+                            {% if form.short_description.errors %}
+                            <p class="text-red-600 text-sm mt-1">
+                                {{ form.short_description.errors }}
+                            </p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Banner Image -->
+                        <div>
+                            <label class="block font-semibold mb-2">
+                                🖼 Banner Image
+                            </label>
+
+                            <div
+                                class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-purple-400 transition">
+                                {{ form.banner_image }}
+                                <p class="text-gray-500 mt-2 text-sm">
+                                    Click to upload image
+                                </p>
+                            </div>
+
+                            <!-- Image Preview -->
+                            <img id="imagePreview" class="mt-4 rounded-lg hidden w-full max-h-72 object-cover" />
+
+                            {% if form.banner_image.errors %}
+                            <p class="text-red-600 text-sm mt-1">
+                                {{ form.banner_image.errors }}
+                            </p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Author -->
+                        <div>
+                            <label class="block font-semibold mb-2">
+                                👤 Author <span class="text-red-500">*</span>
+                            </label>
+
+                            <div class="flex gap-3">
+                                <div class="flex-1">
+                                    {{ form.author }}
+                                </div>
+                                <a href="{% url 'create_author' %}" target="_blank"
+                                    class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-5 py-2 rounded-lg shadow">
+                                    + Add Author
+                                </a>
+
+                            </div>
+
+                            {% if form.author.errors %}
+                            <p class="text-red-600 text-sm mt-1">
+                                {{ form.author.errors }}
+                            </p>
+                            {% endif %}
+                        </div>
+
+
+                        <!-- Publish Toggle -->
+                        <div class="flex items-center space-x-4">
+                            {{ form.is_published }}
+                            <span class="font-medium text-gray-700">
+                                Publish immediately
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT COLUMN (SEO) -->
+                    <div>
+                        <div
+                            class="bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl p-6 border border-purple-100 shadow-sm">
+
+                            <h4 class="font-bold text-gray-800 mb-4">
+                                ⚙️ SEO Settings
+                            </h4>
+
+                            <div class="space-y-6">
+
+                                <div>
+                                    <label class="block text-sm font-semibold mb-1">
+                                        Meta Title
+                                    </label>
+                                    {{ form.meta_title }}
+                                    <p class="text-xs text-gray-500 mt-1">
+                                        Ideal length: 50–60 characters.
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-semibold mb-1">
+                                        Meta Description
+                                    </label>
+                                    {{ form.meta_description }}
+                                    <p class="text-xs text-gray-500 mt-1">
+                                        Ideal length: 150–160 characters.
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-semibold mb-1">
+                                        Meta Keywords
+                                    </label>
+                                    {{ form.meta_keywords }}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Buttons -->
+                <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200">
+                    <a href="{% url 'blog_dashboard' %}"
+                        class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg transition">
+                        Cancel
+                    </a>
+
+                    <button type="submit"
+                        class="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition shadow-lg">
+                        💾 Create Post
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Image Preview Script -->
+<script>
+    const imageInput = document.querySelector('input[type="file"]');
+    const preview = document.getElementById('imagePreview');
+
+    if (imageInput) {
+        imageInput.addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+                preview.classList.remove('hidden');
+            }
+        });
+    }
+</script>
+
+
+{% endblock %}

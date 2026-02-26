@@ -1,0 +1,193 @@
+{% extends "blog/blog_base.html" %}
+{% load static %}
+
+{% block title %}Add Section - {{ post.title }}{% endblock %}
+
+{% block blog_content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-4xl font-bold text-purple-600">
+                    📝 Add Section
+                </h1>
+                <p class="text-gray-600 mt-2">
+                    Add a new section to "{{ post.title }}"
+                </p>
+            </div>
+
+            <div class="flex space-x-3">
+                <a href="{% url 'blog_dashboard' %}"
+                    class="bg-purple-500 hover:bg-purple-600 text-white px-5 py-2 rounded-lg">
+                    Dashboard
+                </a>
+
+                <a href="{% url 'edit_blog_post' post.id %}"
+                    class="bg-gray-500 hover:bg-gray-600 text-white px-5 py-2 rounded-lg">
+                    Back to Post
+                </a>
+            </div>
+        </div>
+
+        <!-- Card -->
+        <div class="bg-white shadow-lg rounded-xl p-8 border border-gray-200">
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <!-- Section Type -->
+                <div class="mb-6">
+                    <label class="block font-semibold mb-2">
+                        Section Type *
+                    </label>
+
+                    {{ form.section_type }}
+
+                    {% if form.section_type.errors %}
+                    <p class="text-red-600 text-sm mt-1">
+                        {{ form.section_type.errors }}
+                    </p>
+                    {% endif %}
+                </div>
+
+                <!-- Order -->
+                <div class="mb-6">
+                    <label class="block font-semibold mb-2">
+                        Order
+                    </label>
+
+                    {{ form.order }}
+
+                    <p class="text-gray-500 text-sm mt-1">
+                        Leave 0 to auto-append
+                    </p>
+
+                    {% if form.order.errors %}
+                    <p class="text-red-600 text-sm mt-1">
+                        {{ form.order.errors }}
+                    </p>
+                    {% endif %}
+                </div>
+
+                <!-- Title -->
+                <div class="mb-6" id="titleField">
+                    <label class="block font-semibold mb-2">
+                        Title
+                    </label>
+
+                    {{ form.title }}
+
+                    {% if form.title.errors %}
+                    <p class="text-red-600 text-sm mt-1">
+                        {{ form.title.errors }}
+                    </p>
+                    {% endif %}
+                </div>
+
+                <!-- Content -->
+                <div class="mb-6" id="contentField">
+                    <label class="block font-semibold mb-2">
+                        Content
+                    </label>
+
+                    {{ form.content }}
+
+                    {% if form.content.errors %}
+                    <p class="text-red-600 text-sm mt-1">
+                        {{ form.content.errors }}
+                    </p>
+                    {% endif %}
+                </div>
+
+                <!-- Image -->
+                <div class="mb-6" id="imageField">
+                    <label class="block font-semibold mb-2">
+                        Image
+                    </label>
+
+                    {{ form.image }}
+
+                    {% if form.image.errors %}
+                    <p class="text-red-600 text-sm mt-1">
+                        {{ form.image.errors }}
+                    </p>
+                    {% endif %}
+                </div>
+
+                <!-- Buttons -->
+                <div class="flex justify-between mt-8 pt-6 border-t border-gray-200">
+                    <a href="{% url 'edit_blog_post' post.id %}"
+                        class="bg-gray-400 hover:bg-gray-500 text-white px-5 py-2 rounded-lg">
+                        Cancel
+                    </a>
+
+                    <div class="flex gap-4">
+
+                        <!-- Save -->
+                        <button type="submit" name="action" value="save"
+                            class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg">
+                            💾 Save
+                        </button>
+
+                        <!-- Save & Add Another -->
+                        <button type="submit" name="action" value="save_add"
+                            class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg">
+                            ➕ Save & Add New Section
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const typeField = document.getElementById("id_section_type");
+    const titleField = document.getElementById("titleField");
+    const contentField = document.getElementById("contentField");
+    const imageField = document.getElementById("imageField");
+
+    function updateFields() {
+        const type = typeField.value;
+
+        // Hide all first
+        titleField.style.display = "none";
+        contentField.style.display = "none";
+        imageField.style.display = "none";
+
+        // H2 & H3 → only title
+        if (type === "h2" || type === "h3") {
+            titleField.style.display = "block";
+        }
+
+        // Paragraph & Conclusion → content (CKEditor)
+        if (type === "paragraph" || type === "conclusion") {
+            contentField.style.display = "block";
+        }
+
+        // Image → image upload
+        if (type === "image") {
+            imageField.style.display = "block";
+        }
+
+        // TOC → nothing required
+        if (type === "toc") {
+            // no fields needed
+        }
+    }
+
+    typeField.addEventListener("change", updateFields);
+    updateFields();
+});
+</script>
+
+
+
+{% endblock %}

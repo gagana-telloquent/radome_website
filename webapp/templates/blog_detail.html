@@ -1,0 +1,384 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="blog-wrapper">
+
+    <div class="blog-container">
+        {% if preview_mode %}
+        <div class="preview-bar">
+            <div class="preview-content">
+                <div class="preview-left">
+                    <span class="preview-icon">⚠</span>
+                    <div>
+                        <strong>Preview Mode</strong>
+                        <p>This is how your blog post will appear to readers.</p>
+                    </div>
+                </div>
+
+                <div class="preview-right">
+                    <a href="{% url 'edit_blog_post' post.id %}" class="preview-btn">
+                        ✏ Edit Post
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Meta -->
+        <div class="blog-meta">
+            <bold> <span>By {{ post.author.name }}</span></bold>
+            <span class="meta-dot"> | </span>
+            <span>{{ post.created_at|date:"F d, Y" }}</span>
+        </div>
+
+        <h1 class="blog-title">{{ post.title|safe }}</h1>
+        <!-- Sections -->
+        {% for section in sections %}
+
+        {% if section.section_type == "toc" %}
+        <div class="table-of-contents">
+            <h2 class="toc-heading">Table of Contents</h2>
+            <ul>
+                {% for s in sections %}
+                {% if s.section_type == "h2" %}
+                <li>
+                    <a href="#{{ s.title|striptags|slugify }}">
+                        {{ s.title }}
+                    </a>
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+
+        {% elif section.section_type == "h2" %}
+        <h2 id="{{ section.title|striptags|slugify }}" class="blog-h2">
+            {{ section.title }}
+        </h2>
+
+        {% elif section.section_type == "h3" %}
+        <h3 id="{{ section.title|striptags|slugify }}" class="blog-h3">
+            {{ section.title }}
+        </h3>
+
+        {% elif section.section_type == "paragraph" %}
+        <div class="blog-content">
+            {{ section.content|safe }}
+        </div>
+
+        {% elif section.section_type == "image" %}
+        {% if section.image %}
+        <img src="{{ section.image.url }}" class="blog-image">
+        {% endif %}
+
+        {% endif %}
+
+        {% endfor %}
+        <!-- FAQ -->
+        {% if faqs %}
+        <div class="blog-faq">
+            <h3 class="blog-heading">FAQs</h3>
+            {% for faq in faqs %}
+            <h5 class="faq-question">{{ faq.question }}</h5>
+            <p class="blog-paragraph">{{ faq.answer }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="blog-cta">
+            <h3>Want to Know More? Schedule a Demo Call.</h3>
+            <a href="{% url 'contact' %}?source=blog&post={{ post.slug }}" class="demo-btn">
+                Schedule a Demo
+            </a>
+        </div>
+
+
+    </div>
+</div>
+<style>
+    .blog-wrapper {
+        padding-top: 95px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .blog-container {
+        width: 100%;
+        max-width: 720px;
+        margin-top: 10px;
+    }
+
+    /* ================= META ================= */
+    .blog-meta {
+        font-size: 14px;
+        color: #777;
+        margin-bottom: 12px;
+    }
+
+    /* ================= H1 ================= */
+    .blog-title {
+        font-size: 34px;
+        font-weight: 700;
+        line-height: 1.3;
+        color: #111;
+    }
+
+    /* ================= H2 ================= */
+    .blog-h2 {
+        font-size: 30px;
+        font-weight: 600;
+        color: #111;
+    }
+
+    /* ================= H3 ================= */
+    .blog-h3 {
+        font-size: 26px;
+        font-weight: 600;
+        color: #25272b;
+    }
+
+    /* ================= CONTENT ================= */
+    .blog-content {
+        font-size: 17px;
+        line-height: 1.75;
+        margin-bottom: 14px;
+        color: #444;
+        text-align: justify;
+    }
+
+    .blog-content p {
+        margin: 0 0 0 0 !important;
+    }
+
+    /* ================= LISTS ================= */
+    .blog-content ul {
+        list-style: disc !important;
+        padding-left: 22px !important;
+        margin-top: 6px;
+        margin-bottom: 14px;
+    }
+
+    .blog-content ol {
+        list-style: decimal !important;
+        padding-left: 22px !important;
+        margin-top: 6px;
+        margin-bottom: 14px;
+    }
+
+    .blog-content li {
+        display: list-item !important;
+        margin-bottom: 5px;
+    }
+
+    /* ================= IMAGE ================= */
+    .blog-image {
+        width: 100%;
+        margin: 20px 0;
+        border-radius: 8px;
+    }
+
+    /* ================= CONCLUSION ================= */
+    .blog-conclusion {
+        background: #f4f6fb;
+        padding: 18px 22px;
+        border-left: 4px solid #140a52;
+        border-radius: 6px;
+        margin: 24px 0;
+        font-size: 17px;
+        line-height: 1.7;
+        text-align: justify;
+    }
+
+    /* ================= FAQ ================= */
+    .blog-faq {
+        margin-top: 30px;
+    }
+
+    .faq-question {
+        font-size: 17px;
+        font-weight: 600;
+        margin-top: 12px;
+        margin-bottom: 5px;
+    }
+
+    /* ================= CTA ================= */
+    .blog-cta {
+        margin-top: 10px;
+        padding: 28px;
+        background: #f7f8fc;
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .demo-btn {
+        display: inline-block;
+        background: #140a52;
+        color: #fff;
+        padding: 20px 26px;
+        border-radius: 6px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: 0.3s ease;
+    }
+
+    .demo-btn:hover {
+        background: #2a1d7f;
+    }
+
+    /* ================= PREVIEW BAR ================= */
+    .preview-bar {
+        background: linear-gradient(90deg, #fef3c7, #fde68a);
+        border-left: 6px solid #f59e0b;
+        padding: 16px 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .preview-content {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .preview-left {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        color: #92400e;
+    }
+
+    .preview-icon {
+        font-size: 22px;
+    }
+
+    .preview-left p {
+        margin: 2px 0 0;
+        font-size: 13px;
+    }
+
+    .preview-btn {
+        background: #140a52;
+        color: #fff;
+        padding: 7px 16px;
+        border-radius: 6px;
+        font-size: 13px;
+        text-decoration: none;
+        transition: 0.3s ease;
+    }
+
+    .preview-btn:hover {
+        background: #2a1d7f;
+    }
+
+    /* ================= FORCE THEME RESET ================= */
+    .blog-container h1,
+    .blog-container h2,
+    .blog-container h3,
+    .blog-container p,
+    .blog-container li {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+
+    /* ================= BLOG CONTENT LINKS ================= */
+    .blog-content a,
+    .blog-conclusion a,
+    .blog-faq a {
+        color: #1d4ed8;
+        /* Blue */
+        text-decoration: underline;
+        font-weight: 500;
+        transition: 0.3s ease;
+    }
+
+    .blog-content a:hover,
+    .blog-conclusion a:hover,
+    .blog-faq a:hover {
+        color: #0e178f;
+        /* Darker blue on hover */
+        text-decoration: underline;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    .blog-h2,
+    .blog-h3 {
+        scroll-margin-top: 110px;
+    }
+    
+
+    /* ================= TABLE OF CONTENTS ================= */
+
+
+    .toc-heading {
+        font-size: 30px;
+        /* same as .blog-h2 */
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #111;
+    }
+
+    .table-of-contents ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .table-of-contents li {
+        margin-bottom: 8px;
+    }
+
+    .table-of-contents li.toc-h3 {
+        padding-left: 20px;
+        font-size: 15px;
+    }
+
+    .table-of-contents a {
+        font-size: 18px;
+        /* paragraph size */
+        font-weight: 400;
+        /* normal weight */
+        line-height: 1.6;
+    }
+
+    .table-of-contents a:hover {
+        color: #0e178f;
+    }
+
+
+    .table-of-contents li::before {
+        content: "• ";
+        color: #333;
+        margin-right: 6px;
+        padding-left: 10px;
+    }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ post.title|escapejs }}",
+  "description": "{{ post.meta_description|escapejs }}",
+  "image": "{{ post.banner_image.url }}",
+  "datePublished": "{{ post.created_at|date:'Y-m-d' }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ post.author.name }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Radome Technologies",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{% static 'images/logoradome.png' %}"
+    }
+  }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<!-- Hero Section Start -->
+{% if hero %}
+<!-- Title Bar -->
+{% if hero.background_image %}
+<div class="pbmit-title-bar-wrapper1" style="background-image: url('{{ hero.background_image.url }}');
+            background-size: cover;
+            background-position: center;
+            height: 450px;">
+   {% else %}
+   <div class="pbmit-title-bar-wrapper1" style="background-size: cover;
+            background-position: center;">
+      {% endif %}
+
+      <div class="hero-content" data-aos="fade-up" data-aos-duration="3000">
+
+         <div data-aos="fade-up" data-aos-duration="3000" class="list-unstyled mt-4" style="font-size: 24px;">
+
+            <h1 class="pbmit-tbar-title">
+               {{ hero.title|safe }}
+            </h1>
+
+         </div>
+
+      </div>
+   </div>
+   {% endif %}
+   <!-- Title Bar End-->
+   <!-- Featured practices start -->
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {% if hero and hero.subtitle %}
+      <div class="hero-subtitle-box" data-aos="fade-up" data-aos-duration="1000">
+         <p>
+            {{ hero.subtitle|safe }}
+         </p>
+      </div>
+      {% endif %}
+
+      <section class="featured-practices">
+
+         <h1 class="text-lg font-semibold tracking-wide text-gray-800"
+            style="font-size: 50px !important; font-family: 'Inter', sans-serif;">
+            Industries We Power
+         </h1>
+
+         <br>
+
+         <h4 class="focus" style="font-size: 30px !important">
+            We focus our AI expertise where it matters most —
+            <br> on the industries shaping the future.
+         </h4>
+
+         <br>
+
+         <div class="container" style="padding: 0px;">
+            <div class="row text-center g-4 mt-4">
+
+               {% for industry in industries %}
+               <div class="col-lg-6 col-md-6">
+                  <div style="
+                    background-image: url('{{ industry.background_image.url }}');
+                    background-size: cover;
+                    background-position: center;
+                    height: 672px;
+                    padding: 20px;
+                    display: flex;
+                    align-items: flex-end;
+               ">
+                     <div class="bg-opacity-50 p-4 rounded w-100 mb-5"
+                        style="font-family: 'Inter', sans-serif !important;">
+
+                        <h2 class="fw-light text-light mb-3 h5-text font-krona-one text-uppercase">
+                           {{ industry.title }}
+                        </h2>
+
+                        <p class="text-light solutions mb-3">
+                           {{ industry.description }}
+                        </p>
+
+                        <div class="mt-3 outline-light">
+                           <a href="{% url 'industry_detail' industry.slug %}" class="btn btn-outline-light">
+                              Learn More
+                           </a>
+                        </div>
+
+                     </div>
+                  </div>
+               </div>
+               {% endfor %}
+
+            </div>
+         </div>
+
+      </section>
+      <section class="article-container" id="blog-content"></section>
+   </div>
+   <!-- Featured practices end -->
+
+
+   <!-- AICore Cards start -->
+   <section class="industrial-solutions">
+      <div class="container">
+         <h2 class="core" style="color: #eeeaea; font-size: 55px !important; line-height: 1;padding-top: 50px;">
+            AI at the Core <br> of Everything We Do
+         </h2>
+
+         <div class="row text-center g-4 mt-4">
+
+            {% for card in ai_core_cards %}
+            <div class="col-lg-4 col-md-6">
+               <div class="card image-bottom-card" style="background-image: url('{{ card.background_image.url }}');
+                        height: 700x !important;">
+
+                  <div class="card-content">
+                     <h2>{{ card.title }}</h2>
+                     <p>{{ card.description }}</p>
+                  </div>
+
+               </div>
+            </div>
+            {% endfor %}
+
+         </div>
+      </div>
+   </section>
+   <!-- Page Content End -->
+   <style>
+      /* ===== Premium Justified Subtitle Box ===== */
+
+      .hero-subtitle-box {
+         max-width: 900px;
+         /* Reduced for better justification */
+         margin: 70px auto 90px auto;
+         padding: 60px 70px;
+         background: #140a52;
+         border-radius: 30px;
+         box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+         transition: all 0.4s ease;
+      }
+
+      .hero-subtitle-box:hover {
+         transform: translateY(-6px);
+         box-shadow: 0 35px 80px rgba(0, 0, 0, 0.2);
+      }
+
+      .hero-subtitle-box p {
+         color: #ffffff;
+         font-size: 22px;
+         line-height: 1.9;
+         text-align: justify;
+         text-justify: inter-word;
+         hyphens: auto;
+         /* Improves word distribution */
+         margin: 0;
+      }
+
+      /* Responsive Improvements */
+      @media (max-width: 992px) {
+         .hero-subtitle-box {
+            padding: 40px 35px;
+         }
+
+         .hero-subtitle-box p {
+            font-size: 19px;
+            line-height: 1.8;
+         }
+      }
+
+      @media (max-width: 576px) {
+         .hero-subtitle-box {
+            padding: 30px 25px;
+            border-radius: 20px;
+         }
+
+         .hero-subtitle-box p {
+            font-size: 17px;
+            line-height: 1.7;
+         }
+      }
+   </style>
+   {% endblock %}

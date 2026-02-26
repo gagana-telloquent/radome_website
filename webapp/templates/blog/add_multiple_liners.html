@@ -1,0 +1,197 @@
+{% extends "blog/blog_base.html" %}
+{% load static %}
+
+{% block title %}Add Section - {{ post.title }}{% endblock %}
+
+{% block blog_content %}
+<div class="container mx-auto px-6 py-12">
+    <div class="max-w-4xl mx-auto">
+
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
+            <div>
+                <h1 class="text-3xl font-bold text-purple-600">
+                    ➕ Add Section
+                </h1>
+                <p class="text-gray-600 mt-2">
+                    Add a new section to "<span class="font-medium">{{ post.title }}</span>"
+                </p>
+            </div>
+
+            <div class="flex gap-3">
+                <a href="{% url 'blog_dashboard' %}"
+                   class="bg-purple-500 hover:bg-purple-600 text-white px-5 py-2 rounded-lg shadow transition">
+                    Dashboard
+                </a>
+
+                <a href="{% url 'edit_blog_post' post.id %}"
+                   class="bg-gray-500 hover:bg-gray-600 text-white px-5 py-2 rounded-lg shadow transition">
+                    ← Back to Post
+                </a>
+            </div>
+        </div>
+
+        <!-- Form Card -->
+        <div class="bg-white shadow-2xl rounded-2xl p-10 border border-gray-100">
+
+            {% if form.non_field_errors %}
+                <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                    {% for error in form.non_field_errors %}
+                        <p class="text-red-600 text-sm">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <form method="post" enctype="multipart/form-data" class="space-y-10">
+                {% csrf_token %}
+
+                <!-- Section Type -->
+                <div>
+                    <label class="block font-semibold mb-2">
+                        Section Type <span class="text-red-500">*</span>
+                    </label>
+
+                    {{ form.section_type }}
+
+                    {% if form.section_type.errors %}
+                        <p class="text-red-600 text-sm mt-2">
+                            {{ form.section_type.errors }}
+                        </p>
+                    {% endif %}
+                </div>
+
+                <!-- Order -->
+                <div>
+                    <label class="block font-semibold mb-2">
+                        Order
+                    </label>
+
+                    {{ form.order }}
+
+                    <p class="text-xs text-gray-500 mt-2">
+                        Leave 0 to automatically append to the end of the blog.
+                    </p>
+
+                    {% if form.order.errors %}
+                        <p class="text-red-600 text-sm mt-2">
+                            {{ form.order.errors }}
+                        </p>
+                    {% endif %}
+                </div>
+
+                <!-- Title Field -->
+                <div id="titleField" class="section-field hidden transition-all duration-300">
+                    <label class="block font-semibold mb-2">
+                        Title
+                    </label>
+
+                    {{ form.title }}
+
+                    {% if form.title.errors %}
+                        <p class="text-red-600 text-sm mt-2">
+                            {{ form.title.errors }}
+                        </p>
+                    {% endif %}
+                </div>
+
+                <!-- Content Field -->
+                <div id="contentField" class="section-field hidden transition-all duration-300">
+                    <label class="block font-semibold mb-2">
+                        Content
+                    </label>
+
+                    {{ form.content }}
+
+                    {% if form.content.errors %}
+                        <p class="text-red-600 text-sm mt-2">
+                            {{ form.content.errors }}
+                        </p>
+                    {% endif %}
+                </div>
+
+                <!-- Image Field -->
+                <div id="imageField" class="section-field hidden transition-all duration-300">
+                    <label class="block font-semibold mb-2">
+                        Image
+                    </label>
+
+                    {{ form.image }}
+
+                    <p class="text-xs text-gray-500 mt-2">
+                        Recommended size: 1200x630px for best SEO preview.
+                    </p>
+
+                    {% if form.image.errors %}
+                        <p class="text-red-600 text-sm mt-2">
+                            {{ form.image.errors }}
+                        </p>
+                    {% endif %}
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex justify-end gap-4 pt-8 border-t border-gray-200">
+                    <a href="{% url 'edit_blog_post' post.id %}"
+                       class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg shadow transition">
+                        Cancel
+                    </a>
+
+                    <button type="submit"
+                            class="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-lg shadow font-semibold transition">
+                        ➕ Add Section
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const typeField = document.getElementById("id_section_type");
+    const fields = {
+        title: document.getElementById("titleField"),
+        content: document.getElementById("contentField"),
+        image: document.getElementById("imageField")
+    };
+
+    function hideAll() {
+        Object.values(fields).forEach(field => {
+            field.classList.add("hidden");
+        });
+    }
+
+    function updateFields() {
+        const type = typeField.value;
+        hideAll();
+
+        // H2 and H3 → Title only
+        if (type === "h2" || type === "h3") {
+            fields.title.classList.remove("hidden");
+        }
+
+        // Paragraph & Conclusion → Content (CKEditor)
+        else if (type === "paragraph" || type === "conclusion") {
+            fields.content.classList.remove("hidden");
+        }
+
+        // Image → Image upload
+        else if (type === "image") {
+            fields.image.classList.remove("hidden");
+        }
+
+        // TOC → nothing required
+        else if (type === "toc") {
+            // No fields needed
+        }
+    }
+
+    if (typeField) {
+        typeField.addEventListener("change", updateFields);
+        updateFields();
+    }
+});
+</script>
+{% endblock %}

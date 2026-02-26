@@ -1,0 +1,298 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Title Bar -->
+<div class="pbmit-title-bar-wrapper"
+   style="background-image: url('{% if hero.background_image %}{{ hero.background_image.url }}{% endif %}'); height: 450px;">
+   <div class="container">
+      <div class="pbmit-title-bar-content">
+         <div class="pbmit-title-bar-content-inner">
+            <div class="pbmit-tbar">
+               <div class="pbmit-tbar-inner container">
+                  <h1 class="pbmit-tbar-title" style="font-family: 'Inter', sans-serif; font-weight: bold;">
+                     {{ hero.title }}
+                  </h1>
+                  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- Title Bar End-->
+
+
+
+<!-- Contact Us Content -->
+<div class="page-content contact-section-style-2">
+   <!-- Contact -->
+   <section class="section-lgx">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-6 pbmit-col-left" style="padding-left: 30px;">
+               <div class="pbmit-heading-subheading">
+                  <h2 class="pbmit-title" style="font-family: 'Inter', sans-serif; font-weight: bold; font-size: 40px;">Let’s Build
+                     Intelligence That Performs</h2>
+                  <div class="pbmit-heading-desc"
+                     style="color: #1a1919; font-family: 'Inter', sans-serif; font-weight: bold; font-size: 20px;">
+                     Whether you're solving for reliability in the sky, precision on the shop floor, or predictability
+                     in complex processes — we’re here to engineer the intelligence behind it.</div>
+               </div>
+               <div class="row gx-3">
+                  <div class="col-md-6">
+                     <div class="pbmit-ihbox pbmit-ihbox-style-7">
+                        <div class="pbmit-ihbox-box">
+                           <div class="pbmit-ihbox-icon">
+                              <div class="pbmit-ihbox-icon-wrapper">
+                                 <div class="pbmit-icon-wrapper pbmit-icon-type-icon">
+                                    <i class="pbmit-digiwize-icon pbmit-digiwize-icon-location"></i>
+                                 </div>
+                              </div>
+                           </div>
+                           <h2 class="pbmit-element-title"
+                              style="color: #1a1919; font-family: 'Inter', sans-serif; font-weight: bold; font-size: 20px;">
+                              our location</h2>
+                           <div class="pbmit-heading-desc"
+                              style="color: #1a1919; font-family: 'Inter', sans-serif;  font-size: 16px;">Radome
+                              Technologies & Services Pvt Ltd # 531, 2nd Floor, 14th Cross Rd, 2nd Stage, <br>
+                              ISRO
+                              Layout Bengaluru, Karnataka : 560078</div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="pbmit-ihbox pbmit-ihbox-style-7">
+                        <div class="pbmit-ihbox-box">
+                           <div class="pbmit-ihbox-icon">
+                              <div class="pbmit-ihbox-icon-wrapper">
+                                 <div class="pbmit-icon-wrapper pbmit-icon-type-icon">
+                                    <i class="pbmit-digiwize-icon pbmit-digiwize-icon-email"></i>
+                                 </div>
+                              </div>
+                           </div>
+                           <h2 class="pbmit-element-title"
+                              style="color: #1a1919; font-family: 'Inter', sans-serif; font-weight: bold; font-size: 20px;">
+                              Mail Us</h2>
+                           <div class="pbmit-heading-desc"><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                 data-cfemail="0b636e6767644b7b696662656d647f6e686325686466"
+                                 style="color: #1a1919; font-family: 'Inter', sans-serif;  font-size: 16px;">
+                                 sales@radometech.com</a> <br>
+
+                              <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                 data-cfemail="19717c75757659697b7470777f766d7c7a71377a7674"></a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="pbmit-ihbox pbmit-ihbox-style-7">
+                        <div class="pbmit-ihbox-box">
+                           <div class="pbmit-ihbox-icon">
+                              <div class="pbmit-ihbox-icon-wrapper">
+                                 <div class="pbmit-icon-wrapper pbmit-icon-type-icon">
+                                    <i class="pbmit-digiwize-icon pbmit-digiwize-icon-telephone"></i>
+                                 </div>
+                              </div>
+                           </div>
+                           <h2 class="pbmit-element-title"
+                              style="color: #1a1919; font-family: 'Inter', sans-serif; font-weight: bold; font-size: 20px;">
+                              Phone Us</h2>
+                           <div class="pbmit-heading-desc"
+                              style="color: #1a1919; font-family: 'Inter', sans-serif;  font-size: 16px;">
+                              Office: +91 9108262004<br>
+                              Office: +91 9972543620
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="pbmit-ihbox pbmit-ihbox-style-7">
+                        <div class="pbmit-ihbox-box">
+                           <div class="pbmit-ihbox-icon">
+                              <div class="pbmit-ihbox-icon-wrapper">
+                                 <div class="pbmit-icon-wrapper pbmit-icon-type-icon">
+                                    <i class="pbmit-digiwize-icon pbmit-digiwize-icon-clock"></i>
+                                 </div>
+                              </div>
+                           </div>
+                           <h2 class="pbmit-element-title"
+                              style="color: #1a1919; font-family: 'Inter', sans-serif; font-weight: bold; font-size: 20px;">
+                              Working Hours:</h2>
+                           <div class="pbmit-heading-desc"
+                              style="color: #1a1919; font-family: 'Inter', sans-serif;  font-size: 16px;">Monday
+                              - Friday <br>9 am to 6 pm IST </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-6 pbmit-col-right">
+               <div class="form-wrapper pbmit-bg-color-blackish">
+                  <div class="pbmit-heading-subheading text-global">
+                     <h4 class="pbmit-title" style="font-family: 'Inter',sans-serif; font-size: 35px; color:#4fd1c5;">
+                        Reach out to explore how AI can transform your operations</h4>
+                     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap"
+                        rel="stylesheet">
+                  </div>
+                  <!-- <div id="contact-form-section" class="contact-form contact-form-style-3"> -->
+                  <div class="contact-form contact-form-style-3">
+                     <style>
+                        /* ================= CONTACT FORM MODERN FOCUS UI ================= */
+
+                        .contact-form input,
+                        .contact-form textarea {
+                           width: 100%;
+                           padding: 14px 16px;
+                           margin-bottom: 18px;
+                           border-radius: 10px;
+                           border: 1px solid rgba(0, 0, 0, 0.15);
+                           background: #ffffff;
+                           color: #111;
+                           font-size: 16px;
+                           transition: all 0.3s ease;
+                           caret-color: #0d0e0d;
+                           /* 🔥 Cursor color */
+                        }
+
+                        /* Hover effect */
+                        .contact-form input:hover,
+                        .contact-form textarea:hover {
+                           border-color: #0de3d0;
+                        }
+
+                        /* 🔥 Focus Effect */
+                        .contact-form input:focus,
+                        .contact-form textarea:focus {
+                           outline: none !important;
+                           border-color: #0de3d0;
+                           box-shadow: 0 0 0 4px rgba(13, 227, 208, 0.15);
+                           transform: translateY(-2px);
+                           /* subtle lift effect */
+                        }
+
+                        /* Placeholder */
+                        .contact-form input::placeholder,
+                        .contact-form textarea::placeholder {
+                           color: #555;
+                        }
+
+                        /* Autofill Fix */
+                        input:-webkit-autofill,
+                        textarea:-webkit-autofill {
+                           -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+                           -webkit-text-fill-color: #111 !important;
+                           caret-color: #0de3d0;
+                        }
+                     </style>
+                     {% if messages %}
+                     {% for message in messages %}
+                     <div
+                        style="background:#d4edda; color:#155724; padding:12px; margin-bottom:15px; border-radius:6px;">
+                        {{ message }}
+                     </div>
+                     {% endfor %}
+                     {% endif %}
+                     <form method="POST" novalidate>
+                        {% csrf_token %}
+
+                        <!-- Name -->
+                        {{ form.name }}
+                        {% if form.name.errors %}
+                        <div style="color:#ff4d4d; font-size:14px; margin-bottom:10px;">
+                           {{ form.name.errors.0 }}
+                        </div>
+                        {% endif %}
+
+                        <!-- Email -->
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                        <div style="color:#ff4d4d; font-size:14px; margin-bottom:10px;">
+                           {{ form.email.errors.0 }}
+                        </div>
+                        {% endif %}
+
+                        <!-- Phone -->
+                        {{ form.phone }}
+                        {% if form.phone.errors %}
+                        <div style="color:#ff4d4d; font-size:14px; margin-bottom:10px;">
+                           {{ form.phone.errors.0 }}
+                        </div>
+                        {% endif %}
+
+                        <!-- Message -->
+                        {{ form.message }}
+                        {% if form.message.errors %}
+                        <div style="color:#ff4d4d; font-size:14px; margin-bottom:10px;">
+                           {{ form.message.errors.0 }}
+                        </div>
+                        {% endif %}
+
+                        <button type="submit"
+                           style="background: hsl(211, 96%, 49%); color: white; border: none; cursor: pointer; padding: 10px; width: 100%; border-radius: 4px;">
+                           Send Message
+                        </button>
+                     </form>
+
+                  </div>
+               </div>
+            </div>
+
+         </div>
+      </div>
+   </section>
+
+   <section class="contact-maps-section section-lgb">
+      <div class="container">
+         <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2911.8053341993577!2d77.55702377348105!3d12.897487616502065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3f9c6e7650c9%3A0x2c6a2d4cc5e20985!2sRadome%20Technologies%20and%20Services%20Pvt%20Ltd!5e1!3m2!1sen!2sin!4v1771326010963!5m2!1sen!2sin%22 width="
+            600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+   </section>
+   <!-- Contact End -->
+
+
+
+</div>
+<!-- Contact Us Content End -->
+
+</div>
+<!-- Page Wrapper End -->
+
+<!-- Search Box Start Here -->
+<div class="pbmit-search-overlay">
+   <div class="pbmit-search-close">
+      <svg class="qodef-svg--close qodef-m" xmlns="https://www.w3.org/2000/svg" width="28.163" height="28.163"
+         viewBox="0 0 26.163 26.163">
+         <rect width="36" height="1" transform="translate(0.707) rotate(45)"></rect>
+         <rect width="36" height="1" transform="translate(0 25.456) rotate(-45)"></rect>
+      </svg>
+   </div>
+   <div class="pbmit-search-outer">
+      <form class="pbmit-site-searchform">
+         <input type="search" class="form-control field searchform-s" name="s" placeholder="Search …">
+         <!-- <button type="submit">
+               <i class="pbmit-base-icon-search-1"></i>
+            </button> -->
+      </form>
+   </div>
+</div>
+<!-- Search Box End Here -->
+
+<!-- Scroll To Top -->
+<div class="pbmit-progress-wrap pbmit-theme-textcolor-white">
+   <svg class="pbmit-progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+      <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"></path>
+   </svg>
+</div>
+<!-- Scroll To Top End -->
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
+   integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
+   data-cf-beacon='{"rayId":"92e04a5db8f5a8f9","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.3.0","token":"125856bf84ab44059737e93b01aa0fef"}'
+   crossorigin="anonymous"></script>
+
+{% endblock %}

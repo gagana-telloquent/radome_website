@@ -1,0 +1,225 @@
+{% extends "blog/blog_base.html" %}
+{% load static %}
+
+{% block title %}Edit Section - {{ post.title }}{% endblock %}
+
+{% block blog_content %}
+<div class="container mx-auto px-6 py-10">
+    <div class="max-w-5xl mx-auto">
+
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+            <div>
+                <h1 class="text-3xl font-bold text-purple-600">
+                    📝 Edit Section
+                </h1>
+                <p class="text-gray-600 mt-2">
+                    Editing section in "{{ post.title }}"
+                </p>
+            </div>
+
+            <a href="{% url 'edit_blog_post' post.id %}"
+                class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg shadow">
+                ← Back to Post
+            </a>
+        </div>
+
+        <!-- Card -->
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-100">
+
+            <div class="p-6 border-b bg-gray-50 rounded-t-2xl">
+                <h3 class="font-semibold text-lg text-gray-800">
+                    Section Details
+                </h3>
+            </div>
+
+            <div class="p-8">
+
+                <form method="post" enctype="multipart/form-data" id="sectionForm" class="space-y-8">
+                    {% csrf_token %}
+
+                    <!-- Top Fields -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                        <!-- Section Type -->
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">
+                                Section Type
+                            </label>
+                            {{ form.section_type }}
+                            {% if form.section_type.errors %}
+                            <p class="text-red-600 text-sm mt-1">
+                                {{ form.section_type.errors }}
+                            </p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Order -->
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">
+                                Order
+                            </label>
+                            {{ form.order }}
+                            <p class="text-xs text-gray-500 mt-1">
+                                Leave 0 for auto-ordering.
+                            </p>
+                            {% if form.order.errors %}
+                            <p class="text-red-600 text-sm mt-1">
+                                {{ form.order.errors }}
+                            </p>
+                            {% endif %}
+                        </div>
+
+                    </div>
+
+                    <!-- Current Preview -->
+                    <div class="bg-gray-50 p-6 rounded-xl border">
+                        <h4 class="font-semibold mb-4 text-gray-700">
+                            Current Content Preview
+                        </h4>
+
+                        {% if section.section_type == "h2" %}
+                        <h3 class="text-xl font-bold">
+                            H2: {{ section.title|default:"No title" }}
+                        </h3>
+
+                        {% elif section.section_type == "h3" %}
+                        <h4 class="text-lg font-semibold text-gray-700">
+                            H3: {{ section.title|default:"No title" }}
+                        </h4>
+
+                        {% elif section.section_type == "paragraph" %}
+                        <p class="text-gray-700">
+                            {{ section.content|default:"No content"|truncatechars:150 }}
+                        </p>
+
+                        {% elif section.section_type == "image" %}
+                        {% if section.image %}
+                        <img src="{{ section.image.url }}" class="rounded-lg max-w-sm shadow">
+                        {% else %}
+                        <p class="text-gray-500 italic">
+                            No image uploaded
+                        </p>
+                        {% endif %}
+
+                        {% elif section.section_type == "conclusion" %}
+                        <p class="italic text-gray-700 border-l-4 border-purple-500 pl-4">
+                            {{ section.content|truncatechars:150 }}
+                        </p>
+                        {% endif %}
+
+                    </div>
+
+                    <!-- Conditional Fields -->
+                    <div class="space-y-6">
+
+                        <!-- Title -->
+                        <div id="titleField" class="section-field hidden">
+                            <label class="block text-sm font-semibold mb-2">
+                                Title
+                            </label>
+                            {{ form.title }}
+                            {% if form.title.errors %}
+                            <p class="text-red-600 text-sm mt-1">
+                                {{ form.title.errors }}
+                            </p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Content -->
+                        <div id="contentField" class="section-field hidden">
+                            <label class="block text-sm font-semibold mb-2">
+                                Content
+                            </label>
+                            {{ form.content }}
+                            {% if form.content.errors %}
+                            <p class="text-red-600 text-sm mt-1">
+                                {{ form.content.errors }}
+                            </p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Image -->
+                        <div id="imageField" class="section-field hidden">
+                            <label class="block text-sm font-semibold mb-2">
+                                Image
+                            </label>
+                            {{ form.image }}
+
+                            {% if section.image %}
+                            <div class="mt-4">
+                                <img src="{{ section.image.url }}" class="rounded-lg max-w-sm shadow">
+                            </div>
+                            {% endif %}
+
+                            {% if form.image.errors %}
+                            <p class="text-red-600 text-sm mt-1">
+                                {{ form.image.errors }}
+                            </p>
+                            {% endif %}
+                        </div>
+
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="flex justify-end gap-4 pt-6 border-t border-gray-200">
+                        <a href="{% url 'edit_blog_post' post.id %}"
+                            class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg shadow">
+                            Cancel
+                        </a>
+
+                        <button type="submit"
+                            class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg shadow font-semibold">
+                            💾 Update Section
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function updateSectionFields() {
+        const sectionType = document.getElementById('id_section_type').value;
+
+        document.querySelectorAll('.section-field').forEach(field => {
+            field.classList.add('hidden');
+        });
+
+        if (sectionType === 'h2' || sectionType === 'h3') {
+            document.getElementById('titleField').classList.remove('hidden');
+        }
+        else if (sectionType === 'paragraph') {
+            document.getElementById('contentField').classList.remove('hidden');
+        }
+        else if (sectionType === 'image') {
+            document.getElementById('imageField').classList.remove('hidden');
+        }
+        else if (sectionType === 'conclusion') {
+            document.getElementById('contentField').classList.remove('hidden');
+            document.getElementById('titleField').classList.remove('hidden');
+        }
+            else if (sectionType === 'toc') {
+        // No fields needed
+    }
+
+
+
+
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const select = document.getElementById('id_section_type');
+
+        if (select) {
+            updateSectionFields();
+            select.addEventListener('change', updateSectionFields);
+        }
+    });
+</script>
+
+{% endblock %}

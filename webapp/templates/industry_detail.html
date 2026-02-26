@@ -1,0 +1,368 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Awaiken">
+
+    <!-- Page Title -->
+    <title>Radome</title>
+
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
+    <link rel="icon" href="{% static 'images/favicon11.png' %}" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+
+    <!-- Shortcode CSS -->
+    <link rel="stylesheet" href="{% static 'css/shortcode.css' %}">
+
+    <!-- Base CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    <!-- Index CSS -->
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+    <!-- Tailwind (CDN – OK for now) -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- SlickNav CSS -->
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+
+    <!-- Font Awesome (local, if used) -->
+    <link rel="stylesheet" href="{% static 'css/all.css' %}" media="screen">
+
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+    <!-- Mouse Cursor -->
+    <link rel="stylesheet" href="{% static 'css/mousecursor.css' %}">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}" media="screen">
+</head>
+
+
+<body style=" font-family: 'Inter', sans-serif !important;">
+
+    <!-- Preloader Start -->
+    <!-- <div class="preloader">
+		<div class="loading-container">
+			<div class="loading"></div>
+			<div id="loading-icon"><img src="images/logoradome.png" alt=""></div>
+		</div>
+	</div> -->
+    <!-- Preloader End -->
+
+    <style>
+        /* Hide desktop menu and show hamburger on mobile */
+        @media (max-width: 991.98px) {
+            .site-navigation {
+                display: none !important;
+            }
+
+            .navbar-header {
+                display: block !important;
+            }
+        }
+
+        /* Show desktop menu and hide hamburger on desktop */
+        @media (min-width: 992px) {
+            .site-navigation {
+                display: block !important;
+            }
+
+            .navbar-header {
+                display: none !important;
+            }
+        }
+
+        /* Mobile menu overlay styles */
+        @media (max-width: 991.98px) {
+            .pbmit-menu-wrap {
+                position: fixed;
+                top: 0;
+                right: -100vw;
+                width: 80vw;
+                height: 100vh;
+                background: #fff;
+                z-index: 9999;
+                transition: right 0.3s;
+                box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+                overflow-y: auto;
+
+
+
+            }
+
+        }
+    </style>
+
+    <!-- Page Header Start -->
+    {% if detail and detail.banner_image %}
+    <div class="page-header parallaxie" style="background-image: url('{{ detail.banner_image.url }}'); height:500px;">
+        {% else %}
+        <div class="page-header parallaxie" style="height:500px;">
+            {% endif %}
+
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <div class="page-header-box">
+                            <h1 style="font-family: 'Inter', sans-serif;
+                               font-weight: bold;
+                               color: #fff;
+                               text-align: center;
+                               margin-top: 80px;">
+                                {{ detail.page_title|default:industry.title }}
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page Header End -->
+
+
+        <!-- Intro Section -->
+        <div class="page-single-post">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        {% if detail and detail.intro_heading %}
+                        <h2 class="wow fadeInUp" style="font-size: 52px; text-align: center; color: #140a52;">
+                            {{ detail.intro_heading|safe }}
+                        </h2>
+                        {% endif %}
+
+                        <br><br>
+
+                        {% if detail and detail.intro_image %}
+                        <div class="post-image">
+                            <figure class="image-anime reveal">
+                                <img src="{{ detail.intro_image.url }}" alt="">
+                            </figure>
+                        </div>
+                        {% endif %}
+
+                        {% if detail and detail.intro_text %}
+                        <div class="post-entry">
+                            <p style="color: black; font-size: 20px;">
+                                {{ detail.intro_text }}
+                            </p>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Intro End -->
+
+
+        <!-- Dynamic Sections -->
+        <style>
+            .hero-section {
+                max-width: 1200px;
+                margin: 80px auto;
+                padding: 0 20px;
+            }
+
+            .hero-section h2 {
+                font-size: 42px;
+                text-align: center;
+                color: #141c4c;
+                margin-bottom: 40px;
+            }
+
+            .hero-content {
+                display: flex;
+                align-items: flex-start;
+                gap: 50px;
+                margin-bottom: 80px;
+                flex-wrap: wrap;
+            }
+
+            .image-container {
+                flex: 1;
+            }
+
+            .image-container img {
+                width: 100%;
+                height: auto;
+                border-radius: 12px;
+            }
+
+            .text-container {
+                flex: 1;
+            }
+
+            .text-container p {
+                font-size: 20px;
+                line-height: 1.7;
+                color: #111113;
+            }
+
+            .cta-button {
+                display: inline-block;
+                margin-top: 20px;
+                background-color: #0de3d0;
+                color: #141c4c;
+                font-size: 18px;
+                font-weight: bold;
+                padding: 14px 28px;
+                border-radius: 8px;
+                text-decoration: none;
+
+
+            }
+
+            /* Mobile */
+            @media (max-width: 991px) {
+                .hero-content {
+                    flex-direction: column;
+                }
+            }
+
+            .usecase-section {
+                padding-bottom: 40px;
+                text-align: center;
+                /* centers content */
+            }
+
+            .usecase-wrapper {
+                display: flex;
+                justify-content: center;
+                /* centers horizontally */
+                align-items: center;
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            .usecase-pill {
+                background: linear-gradient(180deg, #140a52 0%, #0f073d 100%);
+                color: lch(96.34% 0.71 18.54);
+                padding: 10px 25px;
+                border-radius: 30px;
+                font-weight: 600;
+                text-decoration: none;
+            }
+
+            .usecase-pill:hover {
+                background: linear-gradient(180deg, #13e0d6 0%);
+                color: #ffffff;
+                transform: translateY(-3px);
+                box-shadow: 0 8px 20px rgba(20, 10, 82, 0.4);
+                transition: all 0.3s ease;
+            }
+
+            .usecase-label {
+                font-size: 20px;
+                font-weight: 700;
+                /* makes it bold */
+                color: #222;
+            }
+
+            .highlight-box {
+                background: linear-gradient(135deg, #1c1c1f, #2b2b2f);
+                color: #ffffff;
+                font-size: 20px;
+                line-height: 1.8;
+                max-width: 1000px;
+                margin: 0 auto;
+                padding: 60px 70px;
+                border-radius: 30px;
+
+                text-align: justify;
+                /* 👈 makes both sides straight */
+                text-justify: inter-word;
+                /* improves spacing */
+            }
+        </style>
+
+        {% if detail and detail.highlight_text %}
+        <section style="padding-bottom:60px;">
+            <div class="container">
+                <div class="highlight-box">
+                    {{ detail.highlight_text|safe }}
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        {% if detail.product %}
+        <section class="hero-section">
+            <div class="container">
+                <div class="row align-items-center">
+
+                    {% if detail.product_preview_image %}
+                    <div class="col-lg-6">
+                        <img src="{{ detail.product_preview_image.url }}" class="img-fluid rounded" alt="">
+                    </div>
+                    {% endif %}
+
+                    <div class="col-lg-6">
+                        <h2>
+                            {{ detail.product_preview_title|default:detail.product.title }}
+                        </h2>
+
+                        <p>
+                            {{ detail.product_preview_description|default:detail.product.description }}
+                        </p>
+
+                        <a href="{% url 'product_detail' detail.product.slug %}" class="cta-button">
+                            {{ detail.product_button_text|default:"Explore More" }}
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        {% endif %}
+        {% if detail.use_case %}
+        <section class="usecase-section" style="padding-bottom: 40px;">
+            <div class="container">
+                <div class="usecase-wrapper">
+
+                    <span class="usecase-label">Use Case:</span>
+
+                    <a href="{% url 'use_case_detail' detail.use_case.slug %}" class="usecase-pill">
+                        {{ detail.use_case_preview_title|default:detail.use_case.title }}
+                    </a>
+
+                </div>
+            </div>
+        </section>
+        {% endif %}
+        <!-- Sections End -->
+
+</body>
+
+</html>
+
+{% endblock %}

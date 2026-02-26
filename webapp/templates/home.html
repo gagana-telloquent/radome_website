@@ -1,0 +1,1170 @@
+{% extends "base.html" %}
+
+{% block header_slider %}
+<div class="pbmit-slider-area">
+   <p class="rs-p-wp-fix"></p>
+   <style>
+      .hero-section {
+         position: relative;
+         width: 100%;
+         height: 110vh;
+         overflow: hidden;
+         display: flex;
+         align-items: center;
+         padding-left: 50px;
+         color: white;
+      }
+
+      .hero-section video {
+         position: absolute;
+         top: 0;
+         left: 0;
+         min-width: 90%;
+         min-height: 90%;
+         object-fit: cover;
+         z-index: 0;
+
+
+      }
+
+      .hero-content {
+         position: relative;
+         z-index: 2;
+         max-width: 1000px;
+         margin-top: 100px;
+         margin-left: 50px;
+         padding: 20px 40px 20px 0;
+         background: rgba(0, 0, 0, 0.15);
+         border-radius: 12px;
+
+      }
+
+      .hero-content h1 {
+         font-size: 65px;
+         line-height: 1.2;
+         margin: 0 0 10px 0;
+         text-transform: capitalize;
+         opacity: 0;
+         color: white;
+
+         transform: translateX(100%);
+         animation: slideIn 1s ease-out forwards;
+      }
+
+      .hero-content h1:nth-child(2) {
+         color: #1ad8d3;
+         animation-delay: 0.5s;
+      }
+
+      .hero-content p {
+         font-size: 22px;
+         line-height: 1.5;
+         max-width: 800px;
+         opacity: 0;
+         animation: fadeIn 1s ease-out forwards;
+         animation-delay: 1.5s;
+         color: #fff;
+         background: none;
+      }
+
+      @keyframes slideIn {
+         to {
+            transform: translateX(0);
+            opacity: 1;
+         }
+      }
+
+      @keyframes fadeIn {
+         to {
+            opacity: 1;
+         }
+      }
+
+      @media (max-width: 900px) {
+         .hero-content {
+            margin-left: 30px;
+            margin-top: 60px;
+            padding: 15px 10px;
+         }
+
+         .hero-content h1 {
+            font-size: 36px;
+         }
+
+         .hero-content p {
+            font-size: 16px;
+            margin-top: 18px;
+         }
+      }
+
+      @media (max-width: 600px) {
+         .hero-section {
+            padding-left: 0;
+            height: auto;
+            min-height: 400px;
+         }
+
+         .hero-content {
+            margin-left: 0;
+            margin-top: 40px;
+            padding: 10px 5vw;
+            max-width: 100vw;
+            border-radius: 0;
+         }
+
+         .hero-content h1 {
+            font-size: 26px;
+            text-align: left;
+         }
+
+         .hero-content p {
+            font-size: 14px;
+            text-align: left;
+            margin-top: 12px;
+         }
+      }
+   </style>
+
+   <section class="hero-section">
+
+      {% if hero and hero.background_video %}
+      <div class="hero-bg-video">
+         <video autoplay muted loop playsinline style="position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background-color: rgba(8, 8, 8, 0.5);
+              pointer-events: none;
+              z-index: 1;">
+            <source src="{{ hero.background_video.url }}" type="video/mp4">
+         </video>
+      </div>
+      {% endif %}
+
+      <div class="hero-content">
+         <h1>{{ hero.title|safe }}</h1>
+         <p>{{ hero.subtitle|safe }}</p>
+      </div>
+
+   </section>
+</div>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="container">
+   <style>
+      .container1 {
+         display: flex;
+         border: 2px solid #3ab4c4;
+         /* width: 1250px; */
+         height: 450px;
+         box-sizing: border-box;
+         font-family: 'Inter', sans-serif;
+         margin: 30px auto;
+      }
+
+      .container1 .image-section {
+         width: 80%;
+         height: 100%;
+      }
+
+      .container1 .image-section img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+      }
+
+      .container1 .text-section {
+         width: 50%;
+         padding: 35px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         text-align: justify;
+      }
+   </style>
+   <!-- hero intro -->
+
+{% if intro %}
+<div class="container1">
+
+   <div class="image-section">
+      {% if intro.image %}
+      <img src="{{ intro.image.url }}" alt="Intro Image">
+      {% endif %}
+   </div>
+
+   <div class="text-section">
+      <ul data-aos="fade-up" data-aos-duration="3000" class="list-unstyled mt-4 row">
+         <p style="color: #030303; font-size: 20px; font-family: 'Inter', sans-serif;">
+            {{ intro.description|safe }}
+         </p>
+      </ul>
+   </div>
+
+</div>
+{% endif %}
+
+
+   <!-- stat -->
+   <br><br>
+   <div class="stats-grid">
+      {% for stat in stats %}
+      <div class="stat-item">
+         <div class="stat-number" data-from="0" data-to="{{ stat.value|cut:'+' }}" data-speed="2000"
+            data-refresh-interval="50" 0 style="color:#1ad8d3; font-family:'Inter', sans-serif; font-weight:bold;">
+            {{ stat.value }}
+         </div>
+
+
+         <div class="stat-title" style="font-family:'Inter', sans-serif; color:#0c0c0c; font-weight:500;">
+            {{ stat.label }}
+         </div>
+      </div>
+      {% endfor %}
+   </div>
+   <!-- what do we do -->
+   <section class="section-lgt digital-studio-about1">
+      <div class="container">
+         <div class="row">
+
+            <!-- LEFT CONTENT -->
+            <div class="col-lg-6" style="padding-left: 40px;">
+               <div class="pbmit-heading-subheading animation-style2">
+                  <ul data-aos="fade-up" data-aos-duration="3000" class="list-unstyled mt-4 row"
+                     style="color: rgb(1, 9, 26); font-size: 19px;">
+
+                     <!-- Title -->
+                     <h4 class="value-title" style="font-family: 'Inter', sans-serif; font-weight: bold;">
+                        What We Do
+                     </h4>
+
+                     <!-- Subtitle -->
+                     <div class="value-description"
+                        style="color: #1ad8d3; font-family: 'Inter', sans-serif; font-weight: 600;">
+                        We help organizations harness the full potential of Artificial Intelligence to solve
+                        complex, high-stakes challenges.
+                     </div>
+                  </ul>
+               </div>
+
+               <!-- Short paragraph -->
+               <ul data-aos="fade-up" data-aos-duration="3000" class="list-unstyled mt-4 row" style="font-size: 20px; font-family: 'Inter', sans-serif;
+                       font-weight: 500; color:#0c0c0c;">
+                  <p>
+                     Whether it's improving system reliability, automating decisions, or unlocking predictive
+                     insights — we deliver AI that works in the real world.
+                  </p>
+               </ul>
+
+               <!-- ICON + TEXT LOOP (FROM BACKEND) -->
+               <ul data-aos="fade-up" data-aos-duration="3000" class="list-unstyled mt-4" style="font-size: 20px; padding: 0; margin: 0;
+                       font-family: 'Inter', sans-serif;
+                       font-weight: 500; color:#0c0c0c;">
+
+                  {% for item in what_we_do_items %}
+                  <li class="d-flex align-items-start mb-3">
+                     <img src="{{ item.icon.url }}" alt="" style="width: 40px; height: 40px; margin-right: 12px;">
+                     <span>{{ item.text }}</span>
+                  </li>
+                  {% endfor %}
+
+               </ul>
+            </div>
+
+            <!-- RIGHT IMAGE (FROM BACKEND) -->
+            <div class="col-lg-6">
+               {% if what_we_do_image %}
+               <img src="{{ what_we_do_image.image.url }}" alt="What We Do"
+                  style="width: 90%; height: 80%; margin-top: 80px;">
+               {% endif %}
+            </div>
+
+         </div>
+      </div>
+   </section>
+   <!-- Value card -->
+   <div class="page-content">
+      <div class="value-section" style="margin-top: 0px !important;">
+         <div class="value-container">
+
+            <!-- SECTION HEADING (STATIC – OK) -->
+            <ul data-aos="fade-up" data-aos-duration="3000" class="list-unstyled mt-4 row"
+               style="color: rgb(1, 9, 26); font-size: 19px;">
+
+               <h2 class="value-title" style="font-family: 'Inter', sans-serif;">
+                  How We Add Value
+               </h2>
+
+               <p class="value-description"
+                  style="color: #1ad8d3; font-family: 'Inter', sans-serif; font-weight: 600;">
+                  We don't just deploy algorithms — we design outcomes.
+               </p>
+
+               <p class="value-subtitle" style="font-size: 20px; font-family: 'Inter', sans-serif;
+                      font-weight: 500; color:#0c0c0c;">
+                  By blending AI expertise with system-level thinking, we ensure that every
+                  solution delivers measurable impact.
+               </p>
+            </ul>
+
+            <br>
+
+            <!-- VALUE CARDS (FROM BACKEND) -->
+            <div class="value-cards">
+
+               {% for card in value_cards %}
+               <div class="value-box">
+                  <ul data-aos="fade-up" data-aos-duration="3000" class="list-unstyled mt-4 row">
+
+                     <div class="icon-wrapper">
+                        <img src="{{ card.icon.url }}" alt="">
+                     </div>
+
+                     <div class="value-text" style="font-family: 'Inter', sans-serif;
+                              font-weight: 400; font-size: 20px;">
+                        {{ card.text }}
+                     </div>
+
+                  </ul>
+               </div>
+               {% endfor %}
+
+            </div>
+
+         </div>
+      </div>
+   </div>
+   <!-- Portfolio Start -->
+   <section class="pbmit-bg-color-global development-agency-portfolio" data-cursor="white-color">
+      <div class="container-fluid g-xl-0">
+         <div class="pbmit-element-portfolio-style-2">
+            <div class="pbmit-element-posts-wrapper">
+               <div class="pbmit-ele-header-area">
+                  <div class="pbmit-heading-subheading animation-style2">
+                     <h2 class="value-title" data-aos-duration="3000"
+                        style="font-family: 'Inter', sans-serif; color: #1ad8d3;">
+                        Our work is not just technical, <br>it's transformational.
+                     </h2>
+                  </div>
+                  <div class="pbmit-heading-subheading text-global animation-style2">
+                     <h4 class="pbmit-subtitle"
+                        style="font-family: 'Inter', sans-serif; font-weight: 400; font-size: 25px; color: #eeeaea; line-height: 1.1;">
+                        We’ve engineered AI that operates across aircraft systems, industrial plants,<br> extraction
+                        sites, and production lines, always built for precision, reliability, <br>and measurable
+                        impact.
+                     </h4>
+                  </div>
+               </div>
+               <div class="pbminfotech-post-content"
+                  style="display: flex; gap: 20px; padding: 20px 0; align-items: center; width: 100%;">
+
+                  {% for img in portfolio_images %}
+                  <img src="{{ img.image.url }}" alt="Portfolio Image">
+                  {% endfor %}
+
+               </div>
+
+            </div>
+         </div>
+      </div>
+   </section>
+   <!-- Portfolio End -->
+   <br>
+   <!-- Reel-video Start -->
+   <section class="pbmit-bg-color-blackish reel-video-wrapper overflow-hidden d-none d-lg-block">
+      <div class="container-fluid g-0">
+         <div class="pbmit-element-reel-video-style-1">
+            <div class="pbmit-element-inner">
+               <div class="pbmit-element-posts-wrapper" data-cursor-text="Play">
+                  <div class="pbmit-reel-video-contant">
+                     <div class="pbmit-tag-wrapper"></div>
+                     <div class="pbmit-reel-title-wrap"></div>
+
+                     <div class="pbmit-video-wrapper">
+                        {% if reel_video and reel_video.video %}
+                        <video autoplay muted loop playsinline class="pbmit-reel-video" style="position: absolute;
+              top: 0;
+              left: 0;
+              margin-top: 0%;
+              width: 100%;
+              height: 100%;
+              background-color: rgba(8, 8, 8, 0.5);
+              pointer-events: none;
+              z-index: 1;">
+                           <source src="{{ reel_video.video.url }}" type="video/mp4">
+                           Your browser does not support the video tag.
+                        </video>
+                        {% endif %}
+                     </div>
+                  </div>
+
+
+                  {% if reel_video and reel_video.video %}
+                  <a class="pbmit-link" href="{{ reel_video.video.url }}" target="_blank">
+                     Watch Full Video
+                  </a>
+                  {% endif %}
+
+
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!-- Reel-video End -->
+
+   <!-- Mobile View Video -->
+   <section class="pbmit-bg-color-blackish reel-video-wrapper overflow-hidden d-block d-lg-none">
+      <div class="container-fluid g-0">
+         <div class="pbmit-element-reel-video-style-1">
+            <div class="pbmit-element-inner">
+               <div class="pbmit-element-posts-wrapper">
+                  <div class="pbmit-reel-video-contant">
+
+                     <div class="pbmit-video-wrapper" style="position: relative; padding-top: 56.25%; height: 0;">
+
+                        {% if reel_video and reel_video.video %}
+                        <video id="mobile-radome-video" autoplay muted loop playsinline style="position:absolute;
+                               top:0;
+                               left:0;
+                               width:100%;
+                               height:100%;
+                               z-index:1;
+                               object-fit:cover;
+                               background:#000;">
+                           <source src="{{ reel_video.video.url }}" type="video/mp4">
+                           Your browser does not support the video tag.
+                        </video>
+                        {% endif %}
+
+                     </div>
+                  </div>
+
+                  {% if reel_video and reel_video.video %}
+                  <a class="pbmit-link" href="{{ reel_video.video.url }}" target="_blank">
+                     Watch Full Video
+                  </a>
+                  {% endif %}
+
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <script>
+      // Ensure autoplay works on iOS and Android after user gesture
+      document.addEventListener('DOMContentLoaded', function () {
+         var video = document.getElementById('mobile-radome-video');
+         if (video) {
+            var playPromise = video.play();
+            if (playPromise !== undefined) {
+               playPromise.catch(function () {
+                  // Try to play after user interaction if blocked
+                  var playOnUserGesture = function () {
+                     video.play();
+                     document.removeEventListener('touchstart', playOnUserGesture);
+                     document.removeEventListener('click', playOnUserGesture);
+                  };
+                  document.addEventListener('touchstart', playOnUserGesture);
+                  document.addEventListener('click', playOnUserGesture);
+               });
+            }
+         }
+      });
+   </script>
+   <style>
+      .pbminfotech-post-content img {
+         height: 450px;
+         /* SAME HEIGHT FOR ALL */
+         object-fit: cover;
+         /* crop instead of stretch */
+         flex-shrink: 0;
+         /* optional – match original */
+      }
+
+      @media (max-width: 991.98px) {
+         .pbmit-video-wrapper {
+            position: relative !important;
+            padding-top: 56.25% !important;
+            height: 0 !important;
+            background: #000;
+         }
+
+         #mobile-radome-video {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            background: #000 !important;
+            display: block;
+         }
+      }
+   </style>
+
+
+   <!-- Team Start -->
+   <section class="explore-team-section">
+      <h1 class="value-title" data-aos-duration="3000" style="font-family: 'Inter', sans-serif; font-weight: bold;">
+         Explore Team
+      </h1>
+
+      <p class="explore-description"
+         style="font-family: 'Inter', sans-serif; font-weight: 400; font-size: 20px; color: #020202; line-height: 1.3;">
+         They code with purpose. Design with vision. Strategize with scale. Radome’s team is a powerhouse
+         of AI engineers, data alchemists, and industry futurists — all united by one goal: to build
+         intelligence that performs, predicts, and propels.
+      </p>
+
+      <div class="team-members">
+
+         {% for member in team_members %}
+         <div class="team-member">
+            <img src="{{ member.image.url }}" alt="{{ member.name }}">
+
+            <!-- OPTIONAL (safe to keep hidden if you want later) -->
+            <!--
+         <div class="team-info">
+            <strong>{{ member.name }}</strong><br>
+            <span>{{ member.position }}</span>
+         </div>
+         -->
+         </div>
+         {% endfor %}
+
+      </div>
+
+<a href="{% url 'insights' %}" class="view-button">
+    VIEW TEAM
+</a>
+
+      <br>
+   </section>
+   <!-- Team End -->
+
+
+   <style>
+      .value-cards {
+         display: flex;
+         justify-content: start;
+         gap: 60px;
+      }
+
+      .value-box {
+         width: 260px;
+         text-align: center;
+      }
+
+      .icon-wrapper {
+         width: 80px;
+         height: 80px;
+         border-radius: 50%;
+         background-color: #0b1f4c;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         margin: 0 auto 20px;
+      }
+
+      .icon-wrapper img {
+         width: 42px;
+         height: 42px;
+      }
+
+      .value-text {
+         font-size: 20px;
+         color: #000;
+         line-height: 1.5;
+      }
+
+      @media (max-width: 768px) {
+         .value-box {
+            width: 100%;
+            max-width: 300px;
+         }
+
+         .value-cards {
+            gap: 40px;
+         }
+      }
+
+      .explore-team-section {
+         padding: 50px 20px;
+         background-color: #ffffff;
+         text-align: center;
+         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .explore-heading {
+         font-size: 36px;
+         color: #1a1a1a;
+         margin-bottom: 10px;
+      }
+
+      .explore-description {
+         font-size: 16px;
+         color: #444;
+         max-width: 800px;
+         margin: 0 auto 40px auto;
+      }
+
+      .team-members {
+         display: flex;
+         justify-content: center;
+         flex-wrap: wrap;
+         gap: 30px;
+         margin-bottom: 40px;
+      }
+
+      .team-member img {
+         width: 160px;
+         height: 220px;
+         object-fit: cover;
+         border-radius: 20px;
+         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+         transition: transform 0.3s ease;
+      }
+
+      .team-member img:hover {
+         transform: scale(1.05);
+      }
+
+      .view-button {
+         padding: 12px 30px;
+         background-color: #0b114b;
+         color: white;
+         font-size: 16px;
+         border: none;
+         border-radius: 10px;
+         cursor: pointer;
+         transition: background-color 0.3s;
+      }
+
+      .view-button:hover {
+         background-color: #0dac94;
+      }
+   </style>
+   <!-- Team End -->
+
+
+   <section class="achievements-section">
+      <style>
+         .achievements-section {
+            font-family: 'Segoe UI', sans-serif;
+            background: #170336;
+            padding: 10px 10px;
+            color: #003b4a;
+         }
+
+         .achievements-section h2 {
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 40px;
+         }
+
+         .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            padding: 20px;
+         }
+
+         .achievement-card {
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+         }
+
+         .achievement-card img.logo {
+            max-width: 600px;
+            margin-bottom: 10px;
+         }
+
+         .media-gallery {
+            max-width: 100%;
+            overflow-x: auto;
+            display: flex;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            gap: 20px;
+            padding: 10px 0 30px;
+            margin-bottom: 20px;
+         }
+
+         .media-gallery img {
+            scroll-snap-align: start;
+            border-radius: 12px;
+            height: 200px;
+            flex-shrink: 0;
+            object-fit: cover;
+         }
+
+
+         @media (max-width: 768px) {
+            .media-gallery img {
+               height: 150px;
+            }
+
+            .awards-container img {
+               height: 60px;
+               width: 60px;
+            }
+         }
+
+         .scroll-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 auto 30px;
+            max-width: 100%;
+            overflow: hidden;
+            position: relative;
+         }
+
+         .scroll-btn {
+            background-color: #003b4a;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            z-index: 2;
+         }
+
+         .scroll-wrapper {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            gap: 20px;
+            padding: 10px 0;
+            max-width: 85%;
+         }
+
+         .scroll-item {
+            scroll-snap-align: start;
+            flex: 0 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+         }
+
+         .scroll-item img {
+            height: 200px;
+            width: 320px;
+            object-fit: cover;
+            border-radius: 16px;
+         }
+
+         @media (max-width: 768px) {
+            .scroll-item img {
+               height: 150px;
+               width: 250px;
+            }
+
+            .scroll-wrapper {
+               max-width: 90%;
+            }
+
+            .scroll-btn {
+               width: 36px;
+               height: 36px;
+               font-size: 20px;
+            }
+         }
+      </style>
+      <br><br>
+      <h2 class="value-title"
+         style="color: #fff; font-family: 'Inter', sans-serif; font-weight: bold; font-size: 45px;">Achievements
+         and Recognitions</h2>
+
+      <!-- Achievements Cards -->
+      <div class="achievements-grid">
+
+         {% for achievement in achievements %}
+         <div class="achievement-card">
+            <img src="{{ achievement.image.url }}" alt="Achievement {{ forloop.counter }}" class="logo">
+         </div>
+         {% endfor %}
+
+      </div>
+
+      <!-- Media Gallery -->
+      <div class="scroll-container">
+         <button class="scroll-btn left" onclick="scrollSlider(-1)">❮</button>
+
+         <div class="scroll-wrapper" id="scrollWrapper">
+            {% for media in media_gallery %}
+            <div class="scroll-item">
+               <img src="{{ media.image.url }}" alt="Event {{ forloop.counter }}">
+            </div>
+            {% endfor %}
+         </div>
+
+         <button class="scroll-btn right" onclick="scrollSlider(1)">❯</button>
+      </div>
+
+
+      <script>
+         function scrollSlider(direction) {
+            const container = document.getElementById('scrollWrapper');
+            const scrollAmount = 420;
+            container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+         }
+      </script>
+
+      <!-- 
+Achievement Highlight Section -->
+      <div class="blur-background-container">
+
+         {% if achievement_highlight %}
+         <!-- Blurred Background -->
+         <div class="background-blur"
+            style="background-image: url('{{ achievement_highlight.background_image.url }}');">
+         </div>
+
+         <!-- Overlay Image -->
+         <div class="logos-overlay">
+            <img src="{{ achievement_highlight.overlay_image.url }}" alt="Awards Highlight" class="logos-image">
+         </div>
+         {% endif %}
+
+      </div>
+
+
+
+
+      <style>
+         .blur-background-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+         }
+
+         .background-blur {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+         }
+
+         .logos-overlay {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            width: 100%;
+            height: 80%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            text-align: center;
+         }
+
+         .logos-image {
+            max-width: 80%;
+            height: auto;
+         }
+      </style>
+   </section>
+
+
+
+   <style>
+      /* Self-contained styles that won't affect existing body */
+      .circular-timeline-container {
+         --timeline-size: 600px;
+         --event-size: 120px;
+         --center-logo-size: 180px;
+         --event-img-size: 50px;
+         --event-font-size: 12px;
+         position: relative;
+         width: var(--timeline-size);
+         height: var(--timeline-size);
+         margin: 0 auto;
+      }
+
+      .timeline-wrapper {
+         position: relative;
+         width: 100%;
+         height: 100%;
+      }
+
+      .timeline-circle {
+         position: relative;
+         width: 100%;
+         height: 100%;
+         border-radius: 50%;
+         border: 2px solid #ddd;
+      }
+
+      .timeline-event {
+         position: absolute;
+         width: var(--event-size);
+         height: var(--event-size);
+         background: white;
+         border-radius: 50%;
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+         text-align: center;
+         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+         transition: all 0.3s ease;
+         padding: 10px;
+      }
+
+      .timeline-event:hover {
+         transform: scale(1.05);
+         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+         z-index: 20;
+      }
+
+      .timeline-event img {
+         width: var(--event-img-size);
+         height: var(--event-img-size);
+         object-fit: contain;
+         margin-bottom: 8px;
+      }
+
+      .timeline-event div {
+         font-size: var(--event-font-size);
+         font-weight: 600;
+         color: #333;
+      }
+
+      .timeline-center-logo {
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         width: var(--center-logo-size);
+         height: var(--center-logo-size);
+         background: white;
+         z-index: 10;
+         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .timeline-center-logo img {
+         width: 80%;
+         height: 80%;
+         object-fit: contain;
+      }
+
+      /* Position events around the circle */
+      .event-1 {
+         top: 10%;
+         left: 50%;
+         transform: translateX(-50%);
+      }
+
+      .event-2 {
+         top: 20%;
+         right: 15%;
+      }
+
+      .event-3 {
+         top: 40%;
+         right: 5%;
+      }
+
+      .event-5 {
+         bottom: 40%;
+         left: 5%;
+      }
+
+      .event-6 {
+         bottom: 20%;
+         left: 15%;
+      }
+
+      .event-7 {
+         bottom: 10%;
+         left: 50%;
+         transform: translateX(-50%);
+      }
+
+      /* Connector lines */
+      .timeline-circle::before {
+         content: '';
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         width: 80%;
+         height: 80%;
+         border-radius: 50%;
+         border: 1px dashed #aaa;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+         .circular-timeline-container {
+            --timeline-size: 400px;
+            --event-size: 90px;
+            --center-logo-size: 120px;
+            --event-img-size: 30px;
+            --event-font-size: 10px;
+         }
+      }
+
+      @media (max-width: 480px) {
+         .circular-timeline-container {
+            --timeline-size: 300px;
+            --event-size: 70px;
+            --center-logo-size: 100px;
+            --event-img-size: 25px;
+            --event-font-size: 8px;
+         }
+      }
+   </style>
+
+   <style>
+      @media (max-width: 768px) {
+         .container1 {
+            flex-direction: column;
+            width: 98vw;
+            height: auto;
+            min-width: 0;
+            margin: 15px auto;
+            border-width: 1px;
+         }
+
+         .container1 .image-section,
+         .container1 .text-section {
+            width: 100%;
+            padding: 20px 10px;
+            height: auto;
+         }
+
+         .container1 .image-section img {
+            height: 200px;
+            object-fit: cover;
+         }
+
+         .stats-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: stretch;
+         }
+
+         .stat-item {
+            text-align: center;
+            margin-bottom: 10px;
+         }
+
+         .section-lgt .row {
+            flex-direction: column;
+         }
+
+         .section-lgt .col-lg-6 {
+            width: 100%;
+            margin-top: 20px;
+         }
+
+         .section-lgt img {
+            width: 100% !important;
+            height: auto !important;
+            margin-top: 20px !important;
+         }
+
+         .value-cards {
+            flex-direction: column;
+            gap: 30px;
+            align-items: center;
+         }
+
+         .value-box {
+            width: 90%;
+            max-width: 350px;
+         }
+
+         .pbminfotech-post-content {
+            flex-direction: column;
+            gap: 10px !important;
+            align-items: stretch !important;
+         }
+
+         .pbminfotech-post-content img {
+            width: 100% !important;
+            margin-bottom: 10px;
+         }
+
+         .achievements-grid {
+            grid-template-columns: 1fr !important;
+            gap: 20px;
+         }
+
+         .achievement-card img.logo {
+            max-width: 95vw;
+            height: auto;
+         }
+
+         .blur-background-container {
+            height: 220px !important;
+         }
+
+         .logos-image {
+            max-width: 95vw !important;
+         }
+
+         .explore-team-section .team-members {
+            flex-direction: column;
+            gap: 15px;
+         }
+
+         .team-member img {
+            width: 90vw;
+            max-width: 220px;
+            height: auto;
+         }
+
+         .circular-timeline-container {
+            --timeline-size: 300px;
+            --event-size: 60px;
+            --center-logo-size: 70px;
+            --event-img-size: 20px;
+            --event-font-size: 8px;
+            width: 95vw;
+            height: 95vw;
+            min-width: 0;
+         }
+      }
+   </style>
+
+   <script>
+      // Self-contained JavaScript that won't affect other elements
+      (function () {
+         const events = document.querySelectorAll('.timeline-event');
+
+         events.forEach(event => {
+            event.addEventListener('mouseenter', function () {
+               this.style.zIndex = '20';
+            });
+
+            event.addEventListener('mouseleave', function () {
+               if (!this.classList.contains('timeline-center-logo')) {
+                  this.style.zIndex = '';
+               }
+            });
+         });
+      })();
+   </script>
+
+   
+
+   <!-- Page Content End -->
+
+
+</div>
+{% endblock %}

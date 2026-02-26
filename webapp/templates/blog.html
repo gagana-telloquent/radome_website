@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<!-- Page Wrapper -->
+<div class="page-wrapper">
+
+   <!-- Title Bar -->
+   <div class="pbmit-title-bar-wrapper"
+      style="background-image: url('{% if hero and hero.background_image %}{{ hero.background_image.url }}{% endif %}');">
+
+      <div class="container">
+         <div class="pbmit-title-bar-content">
+            <div class="pbmit-title-bar-content-inner">
+               <div class="pbmit-tbar">
+                  <div class="pbmit-tbar-inner container">
+                     <h2 class="pbmit-tbar-title">
+                        {% if hero %}{{ hero.title }}{% endif %}
+                     </h2>
+
+                     <style>
+                        .pbmit-tbar-title {
+                           font-family: 'Inter', sans-serif !important;
+                           text-align: center;
+                           width: 100%;
+                        }
+
+                        @media (max-width: 767.98px) {
+                           .pbmit-footer-section.pbmit-footer-text-area {
+                              margin-top: 100px !important;
+                           }
+                        }
+                     </style>
+                  </div>
+               </div>
+
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Title Bar End-->
+
+   <!-- Page Content -->
+   <div class="page-content">
+
+      <!-- Blog Mesonry Grid Start -->
+      <section class="blog-grid-col pbmit-element-blog-style-1 pbmit-element-viewtype-masonry">
+         <div class="container">
+
+            <div class="row pbmit-element-posts-wrapper">
+               <div class="row">
+                  {% for post in posts %}
+                  <div class="col-lg-6 col-md-6 mb-5">
+                     <div class="modern-blog-card">
+
+                        <!-- TITLE -->
+                        <h4 class="modern-blog-title">
+                           <a href="{% url 'blog_detail' post.slug %}">
+                              {{ post.title }}
+                           </a>
+                        </h4>
+
+                        <!-- IMAGE -->
+                        {% if post.banner_image %}
+                        <div class="modern-blog-image">
+                           <a href="{% url 'blog_detail' post.slug %}">
+                              <img src="{{ post.banner_image.url }}" alt="{{ post.title }}">
+                           </a>
+                        </div>
+                        {% endif %}
+                        <div class="modern-blog-date">
+                           <span class="date-icon">🗓</span>
+                           <time datetime="{{ post.created_at|date:'Y-m-d' }}">
+                              {{ post.created_at|date:"F d, Y" }}
+                           </time>
+                        </div>
+
+
+                        <!-- DESCRIPTION -->
+                        {% if post.short_description %}
+                        <p class="modern-blog-desc">
+                           {{ post.short_description|truncatewords:28 }}
+                        </p>
+                        {% endif %}
+
+                        <!-- READ LINK -->
+                        <a href="{% url 'blog_detail' post.slug %}" class="modern-blog-link">
+                           Read Full Article →
+                        </a>
+
+                     </div>
+                  </div>
+                  {% endfor %}
+               </div>
+
+            </div>
+         </div>
+      </section>
+      <!-- Blog Mesonry Grid End -->
+
+   </div>
+   <!-- Page Content End -->
+
+</div>
+<!-- Page Wrapper End -->
+
+<!-- Search Box Start Here -->
+<div class="pbmit-search-overlay">
+   <div class="pbmit-search-close">
+      <svg class="qodef-svg--close qodef-m" xmlns="https://www.w3.org/2000/svg" width="28.163" height="28.163"
+         viewBox="0 0 26.163 26.163">
+         <rect width="36" height="1" transform="translate(0.707) rotate(45)"></rect>
+         <rect width="36" height="1" transform="translate(0 25.456) rotate(-45)"></rect>
+      </svg>
+   </div>
+   <!-- <div class="pbmit-search-outer">
+         <form class="pbmit-site-searchform">
+            <input type="search" class="form-control field searchform-s" name="s" placeholder="Search …">
+            <button type="submit">
+               <i class="pbmit-base-icon-search-1"></i>
+            </button>
+         </form>
+      </div> -->
+</div>
+<!-- Search Box End Here -->
+
+<!-- Scroll To Top -->
+<div class="pbmit-progress-wrap pbmit-theme-textcolor-white">
+   <svg class="pbmit-progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+      <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"></path>
+   </svg>
+</div>
+<!-- Scroll To Top End -->
+
+
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
+   integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
+   data-cf-beacon='{"rayId":"92e8d40dddf8b5bf","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.3.0","token":"125856bf84ab44059737e93b01aa0fef"}'
+   crossorigin="anonymous"></script>
+
+
+<script type="text/javascript">
+   _linkedin_partner_id = "7876020";
+   window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+   window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+</script>
+<script type="text/javascript">
+   (function (l) {
+      if (!l) {
+         window.lintrk = function (a, b) { window.lintrk.q.push([a, b]) };
+         window.lintrk.q = []
+      }
+      var s = document.getElementsByTagName("script")[0];
+      var b = document.createElement("script");
+      b.type = "text/javascript"; b.async = true;
+      b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+      s.parentNode.insertBefore(b, s);
+   })(window.lintrk);
+</script>
+<noscript>
+   <img height="1" width="1" style="display:none;" alt=""
+      src="https://px.ads.linkedin.com/collect/?pid=7876020&fmt=gif" />
+</noscript>
+
+<style>
+   /* ===== MODERN BLOG CARD ===== */
+
+   .modern-blog-card {
+      background: #f9f9fb;
+      padding: 35px;
+      border-radius: 18px;
+      transition: 0.3s ease;
+      height: 100%;
+   }
+
+   .modern-blog-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.10);
+   }
+
+   /* Title */
+   .modern-blog-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 25px;
+      line-height: 1.3;
+   }
+
+   .modern-blog-title a {
+      text-decoration: none;
+      color: #140a52;
+   }
+
+   .modern-blog-title a:hover {
+      color: #6c2bd9;
+   }
+
+   .modern-blog-image {
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 25px;
+      aspect-ratio: 16 / 9;
+      /* 🔥 perfect blog ratio */
+   }
+
+   .modern-blog-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+   }
+
+   .modern-blog-card:hover .modern-blog-image img {
+      transform: scale(1.05);
+   }
+
+   /* Description */
+   .modern-blog-desc {
+      font-size: 16px;
+      line-height: 1.9;
+      color: #555;
+      margin-bottom: 25px;
+      position: relative;
+      padding-left: 18px;
+      font-weight: 400;
+   }
+
+   /* Left Accent Line */
+   .modern-blog-desc::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 6px;
+      height: 85%;
+      width: 4px;
+      background: linear-gradient(to bottom, #7c3aed, #6c2bd9);
+      border-radius: 5px;
+   }
+
+   /* Better readability on small screens */
+   @media (max-width: 768px) {
+      .modern-blog-desc {
+         font-size: 15px;
+         line-height: 1.8;
+         padding-left: 14px;
+      }
+   }
+
+
+   /* Link */
+   .modern-blog-link {
+      font-weight: 600;
+      color: #7c3aed;
+      text-decoration: none;
+      font-size: 16px;
+   }
+
+   .modern-blog-link:hover {
+      text-decoration: underline;
+   }
+
+   /* Date Styling */
+   .modern-blog-date {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #6b7280;
+      background: #f3f4f6;
+      padding: 6px 14px;
+      border-radius: 30px;
+      width: fit-content;
+      margin-bottom: 18px;
+      transition: 0.3s ease;
+   }
+
+   .modern-blog-date .date-icon {
+      font-size: 14px;
+   }
+
+   .modern-blog-card:hover .modern-blog-date {
+      background: #ede9fe;
+      color: #6c2bd9;
+   }
+</style>
+
+{% endblock %}

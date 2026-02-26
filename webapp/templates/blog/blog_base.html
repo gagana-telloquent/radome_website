@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'images/logoradome.png' %}">
+
+    <title>{% block title %}Blog Dashboard{% endblock %}</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script> -->
+
+
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+    {% if user.is_authenticated %}
+    <!-- Blog Navigation (Only when logged in) -->
+    <nav class="bg-gradient-to-r from-purple-600 to-blue-600 shadow-lg">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center py-4">
+
+                <div class="flex items-center space-x-10">
+                    <a href="{% url 'blog_dashboard' %}" class="text-2xl font-bold text-white tracking-wide">
+                        📝 Blog Dashboard
+                    </a>
+
+                    <div class="hidden md:flex space-x-6 text-white font-medium">
+                        <a href="{% url 'blog_dashboard' %}" class="hover:text-gray-200">
+                            Dashboard
+                        </a>
+
+                        <a href="{% url 'create_post' %}" class="hover:text-gray-200">
+                            Create Post
+                        </a>
+
+                        <a href="{% url 'blog' %}" class="hover:text-gray-200">
+                            View Website Blog
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-5">
+                    <div class="bg-white/20 px-4 py-2 rounded-full text-white text-sm font-medium">
+                        👋 {{ user.username }}
+                    </div>
+
+                    <a href="{% url 'blog_logout' %}"
+                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm">
+                        🚪 Logout
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+    {% endif %}
+
+    <!-- Global Messages -->
+    {% if messages %}
+    <div class="container mx-auto px-6 mt-6">
+        {% for message in messages %}
+        <div class="
+            px-4 py-3 rounded-lg border text-sm mb-3
+            {% if message.tags == 'error' %}
+                bg-red-100 border-red-400 text-red-700
+            {% elif message.tags == 'info' %}
+                bg-blue-100 border-blue-400 text-blue-700
+            {% else %}
+                bg-green-100 border-green-400 text-green-700
+            {% endif %}
+        ">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Page Content -->
+    <div class="min-h-screen bg-gray-50 py-8">
+        <div class="container mx-auto px-6">
+            {% block blog_content %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <!-- CKEditor 4 -->
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const textarea = document.querySelector('#id_content');
+
+    if (textarea) {
+        ClassicEditor
+            .create(textarea)
+            .then(editor => {
+                console.log("Editor ready");
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+
+});
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const el = document.getElementById('sortable-sections');
+
+            if (el) {
+
+                const updateUrl = el.dataset.url;
+
+                new Sortable(el, {
+                    animation: 150,
+                    onEnd: function () {
+
+                        const order = [];
+
+                        el.querySelectorAll('[data-id]').forEach((item, index) => {
+                            order.push({
+                                id: item.dataset.id,
+                                order: index + 1
+                            });
+                        });
+
+                        fetch(updateUrl, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRFToken": "{{ csrf_token }}"
+                            },
+                            body: JSON.stringify({ order: order })
+                        });
+                    }
+                });
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

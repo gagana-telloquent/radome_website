@@ -1,0 +1,76 @@
+{% load static %}
+
+
+<!-- Header Main Area -->
+<header class="site-header header-style-1"
+        style="position: absolute; width: 100%; z-index: 1000;">
+
+
+   <!-- HEADER OVERLAY : NAVIGATION ONLY -->
+   <div class="pbmit-header-overlay">
+      <div class="site-header-menu">
+         <div class="container-fluid g-0">
+            <div class="row g-0">
+               <div class="col-md-12">
+                 <div class="d-flex align-items-center justify-content-between pbmit-header-content">
+
+                     <!-- LOGO -->
+                     <div class="d-flex align-items-center pbmit-header-content">
+                        <div class="site-branding pbmit-logo-area">
+                           <h1 class="site-title">
+                              <a href="{% url 'home' %}">
+                                 <img class="logo-img" src="{% static 'images/radomlogo.png' %}"
+                                    alt="Radome Technologies">
+                              </a>
+                           </h1>
+                        </div>
+                     </div>
+
+                     <!-- NAVIGATION -->
+                     <div class="site-navigation">
+                        <nav class="main-menu navbar-expand-xl navbar-light">
+                           <div class="pbmit-mobile-menu-bg"></div>
+
+                           <div class="collapse navbar-collapse clearfix show" id="pbmit-menu">
+                              <div class="pbmit-menu-wrap">
+
+                                 <span class="closepanel">
+                                    <svg class="qodef-svg--close qodef-m" xmlns="https://www.w3.org/2000/svg"
+                                       width="20.163" height="20.163" viewBox="0 0 26.163 26.163">
+                                       <rect width="36" height="1" transform="translate(0.707) rotate(45)"></rect>
+                                       <rect width="36" height="1" transform="translate(0 25.456) rotate(-45)"></rect>
+                                    </svg>
+                                 </span>
+
+                                 <ul class="navigation clearfix">
+                                    <li class="active"><a href="{% url 'home' %}">Home</a></li>
+                                    <li><a href="{% url 'our_work' %}">Our Work</a></li>
+                                    <li><a href="{% url 'insights' %}">Our Insights</a></li>
+                                    <li><a href="{% url 'blog' %}">Blogs</a></li>
+                                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                                 </ul>
+
+                              </div>
+                           </div>
+                        </nav>
+                     </div>
+
+                     <!-- MOBILE TOGGLE -->
+                     <div class="pbmit-right-box">
+                        <div class="navbar-header">
+                           <button class="navbar-toggler" type="button" id="pbmit-menu-toggle">
+
+                              <span class="navbar-toggler-icon"></span>
+                              <i class="fa fa-bars"></i>
+                           </button>
+                        </div>
+                     </div>
+
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</header>
+<!-- Header Main Area End -->

@@ -1,0 +1,110 @@
+{% extends "blog/blog_base.html" %}
+{% load static %}
+
+{% block title %}Create Author{% endblock %}
+
+{% block blog_content %}
+<div class="container mx-auto px-6 py-10">
+    <div class="max-w-2xl mx-auto">
+
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h2 class="text-3xl font-bold text-purple-600">
+                    👤 Create New Author
+                </h2>
+                <p class="text-gray-600 mt-1">
+                    Add a new blog author profile
+                </p>
+            </div>
+
+            <a href="{% url 'create_post' %}"
+               class="bg-gray-500 hover:bg-gray-600 text-white px-5 py-2 rounded-lg transition">
+                ← Back
+            </a>
+        </div>
+
+        <!-- Card -->
+        <div class="bg-white shadow-xl rounded-2xl p-8 border border-gray-100">
+
+            <form method="post" enctype="multipart/form-data" class="space-y-6">
+                {% csrf_token %}
+
+                <!-- Name -->
+                <div>
+                    <label class="block font-semibold mb-2">
+                        👤 Author Name <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text"
+                           name="name"
+                           class="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                           placeholder="Enter author name"
+                           required>
+
+                    {% if form.name.errors %}
+                        <p class="text-red-600 text-sm mt-1">
+                            {{ form.name.errors }}
+                        </p>
+                    {% endif %}
+                </div>
+
+                <!-- Bio -->
+                <div>
+                    <label class="block font-semibold mb-2">
+                        📝 Bio
+                    </label>
+                    <textarea name="bio"
+                              rows="4"
+                              class="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                              placeholder="Short author bio (optional)"></textarea>
+                </div>
+
+                <!-- Image -->
+                <div>
+                    <label class="block font-semibold mb-2">
+                        🖼 Profile Image
+                    </label>
+
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-purple-400 transition">
+                        <input type="file" name="image" id="authorImage" class="mx-auto">
+                        <p class="text-gray-500 mt-2 text-sm">
+                            Upload author profile picture
+                        </p>
+                    </div>
+
+                    <!-- Preview -->
+                    <img id="previewImage"
+                         class="hidden mt-4 w-32 h-32 rounded-full object-cover border shadow">
+                </div>
+
+                <!-- Buttons -->
+                <div class="flex justify-end pt-6 border-t border-gray-200">
+                    <button type="submit"
+                            class="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition shadow-lg">
+                        💾 Save Author
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<!-- Image Preview Script -->
+<script>
+    const imageInput = document.getElementById("authorImage");
+    const preview = document.getElementById("previewImage");
+
+    if (imageInput) {
+        imageInput.addEventListener("change", function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+                preview.classList.remove("hidden");
+            }
+        });
+    }
+</script>
+
+{% endblock %}

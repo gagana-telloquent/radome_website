@@ -1,0 +1,113 @@
+{% load static %}
+
+<footer class="footer site-footer" style="background: linear-gradient(180deg, #140a52 0%, #0f073d 100%);
+font-size:15px;
+font-family:'Inter', sans-serif;">
+
+   <div class="container" style="padding-left:40px;padding-right:40px;">
+      <div class="row gy-8 justify-content-center" style="padding:60px 0 40px;">
+
+         <!-- Column 1 -->
+         <div class="col-md-6 col-lg-3">
+            <h5 style="color:#ffffff;font-weight:600;margin-bottom:10px;">
+               Ready to build intelligent systems that deliver real results?
+            </h5>
+            <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7282331393970348032"
+               style="color:#4fd1c5;text-decoration:none;">
+               Subscribe to Our Newsletter
+            </a>
+         </div>
+
+         <!-- Column 2 -->
+         <div class="col-md-6 col-lg-3 d-flex flex-column align-items-start" style="padding-left:90px;">
+            <h6 style="color:#4fd1c5;font-weight:600;margin-bottom:15px;">Menu</h6>
+            <ul style="list-style:none;padding:0;margin:0;line-height:1.9;">
+               <li><a href="{% url 'home' %}" class="footer-link">Home</a></li>
+               <li><a href="{% url 'our_work' %}" class="footer-link">Our Work</a></li>
+               <li><a href="{% url 'insights' %}" class="footer-link">Our Insights</a></li>
+               <li><a href="{% url 'blog' %}" class="footer-link">Blogs</a></li>
+            </ul>
+         </div>
+
+         <!-- Column 3 -->
+         <div class="col-md-6 col-lg-3  flex-column align-items-center">
+            <h6 style="color:#4fd1c5;font-weight:600;margin-bottom:15px;">Pages</h6>
+            <ul style="list-style:none;padding:0;margin:0;line-height:1.9;">
+               <li><a href="{% url 'contact' %}" class="footer-link">Contact</a></li>
+               <li>
+                  <a href="{% url 'product_detail' 'prohm' %}" class="footer-link">
+                     ProHM+
+                  </a>
+               </li>
+
+               <li>
+                  <a href="{% url 'use_case_detail' 'ai-powered-temperature-control-in-coconut-oil' %}" class="footer-link">
+                     Process Industry Use Case
+                  </a>
+               </li>
+               <li><a href="{% url 'privacy_policy' %}" class="footer-link">Privacy Policy</a></li>
+            </ul>
+         </div>
+
+         <!-- Column 4 -->
+         <div class="col-md-6 col-lg-3">
+            <h6 style="color:#4fd1c5;font-weight:600;margin-bottom:15px;">Address</h6>
+
+            <div style="line-height:1.7;opacity:.9;margin-bottom:10px;color:#ffffff;">
+               Radome Technologies & Services Pvt Ltd<br>
+               #531, 2nd Floor, 14th Cross Rd,<br>
+               ISRO Layout, Bengaluru – 560078<br>
+               <a href="{% url 'contact' %}" class="footer-link" style="text-decoration: underline;">
+                  View On Map
+               </a>
+            </div>
+
+            <div style="margin-bottom:10px;color:#ffffff;">
+               <strong>Working Hours:</strong> 9 AM – 6 PM IST
+            </div>
+            <h6 style="color:#4fd1c5;font-weight:600;margin-bottom:15px;"> Enquiries </h6>
+            <div style="margin-top:10px;">
+               <a href="tel:+918762640093" class="footer-link">
+                  +91 87626 40093
+               </a><br>
+               <a href="mailto:sales@radometech.com" class="footer-link">
+                  sales@radometech.com
+               </a>
+            </div>
+         </div>
+
+      </div>
+
+      <!-- Bottom Section -->
+      <div class="row align-items-center" style="border-top:1px solid rgba(255,255,255,0.1);padding:20px 0;">
+
+         <div class="col-md-6 d-flex gap-3 mb-2 mb-md-0">
+
+            <a href="https://www.linkedin.com/company/radometech/" target="_blank" class="social-icon">
+               <i class="pbmit-base-icon-linkedin-in"></i>
+            </a>
+
+            <a href="https://x.com/radometech" target="_blank" class="social-icon">
+               <i class="pbmit-base-icon-twitter"></i>
+            </a>
+
+            <a href="https://www.instagram.com/radome_technologies" target="_blank" class="social-icon">
+               <i class="pbmit-base-icon-instagram"></i>
+            </a>
+
+            <a href="https://www.facebook.com/radometechnologies/" target="_blank" class="social-icon">
+               <i class="pbmit-base-icon-facebook-f"></i>
+            </a>
+
+         </div>
+
+         <div class="col-md-6 text-md-end text-center">
+            © 2026
+            <a href="{% url 'home' %}" class="footer-link">Radome Technologies</a>.
+            All Rights Reserved.
+         </div>
+
+      </div>
+
+   </div>
+</footer>

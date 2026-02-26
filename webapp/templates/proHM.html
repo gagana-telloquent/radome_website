@@ -1,0 +1,544 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<style>
+   :root {
+      --primary: #0066cc;
+      --primary-light: #e6f2ff;
+      --secondary: #00aaff;
+      --dark: #002240;
+      --light: #f8fbfe;
+      --text: #333;
+      --text-light: #666;
+      --white: #ffffff;
+      --success: #00cc88;
+      --warning: #ffaa44;
+      --danger: #ff5566;
+   }
+
+   * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+   }
+
+   body {
+      font-family: 'Inter', sans-serif;
+      background: var(--light);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+   }
+
+   .container {
+      /* max-width: 1200px;
+         margin: 0 auto; */
+      padding: 0 20px;
+   }
+
+   /* Modern Hero Section */
+   .hero {
+   background: rgb(6, 6, 46);
+   color: var(--white);
+
+   display: flex;
+   justify-content: center;   /* Horizontal center */
+   align-items: center;       /* Vertical center */
+
+   min-height: 100vh;         /* Full screen height */
+   position: relative;
+   overflow: hidden;
+   text-align: center;
+   }
+
+   .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+      
+   }
+
+   .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      line-height: 1.2;
+      color: white;
+   }
+
+   .hero .tagline {
+      display: inline-block;
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 30px;
+      padding: 8px 20px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+   }
+
+   .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+      color: rgba(255, 255, 255, 0.9);
+   }
+
+   /* Features Grid */
+   .features {
+      padding: 100px 0;
+      background: var(--white);
+   }
+
+   .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+   }
+
+   .section-header h2 {
+      font-size: 2.5rem;
+      color: var(--dark);
+      margin-bottom: 15px;
+      font-weight: 700;
+   }
+
+   .section-header p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--text-light);
+      font-size: 1.1rem;
+   }
+
+   .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+   }
+
+   .feature-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      position: relative;
+      overflow: hidden;
+   }
+
+   .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: #1f1755;
+   }
+
+   .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 102, 204, 0.15);
+   }
+
+   .feature-card h3 {
+      font-size: 1.5rem;
+      color: var(--dark);
+      margin-bottom: 15px;
+      font-weight: 600;
+   }
+
+   .feature-card .feature-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+   }
+
+   .feature-card p {
+      color: var(--text-light);
+      margin-bottom: 15px;
+   }
+
+   .feature-card ul {
+      margin-top: 20px;
+      padding-left: 20px;
+   }
+
+   .feature-card ul li {
+      margin-bottom: 8px;
+      color: var(--text-light);
+      position: relative;
+      list-style: none;
+      padding-left: 25px;
+   }
+
+   .feature-card ul li::before {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      color: var(--success);
+   }
+
+   /* Why Choose Section */
+   .why-choose {
+      padding: 100px 0;
+      background: linear-gradient(to bottom, var(--light), var(--white));
+   }
+
+   .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+   }
+
+   .benefit-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+      transition: all 0.3s ease;
+      text-align: center;
+   }
+
+   .benefit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 102, 204, 0.1);
+   }
+
+   .benefit-card .benefit-icon {
+      width: 70px;
+      height: 70px;
+      background: var(--primary-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: var(--primary);
+      font-size: 1.8rem;
+   }
+
+   .benefit-card h4 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: var(--dark);
+   }
+
+   .benefit-card p {
+      color: var(--text-light);
+   }
+
+   /* Real World Impact Section */
+   .impact-section {
+      /* padding: 100px 0; */
+      background: var(--white);
+   }
+
+   .impact-card {
+      background: #140a52;
+      color: var(--white);
+      border-radius: 12px;
+      padding: 40px;
+      max-width: 900px;
+      margin: 0 auto;
+      box-shadow: 0 20px 40px rgba(0, 102, 204, 0.2);
+   }
+
+   .impact-card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      font-weight: 600;
+      color: wheat;
+   }
+
+   .impact-card p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      opacity: 0.9;
+   }
+
+   .impact-card .impact-label {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 5px 15px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      font-weight: 500;
+   }
+
+   /* Responsive Adjustments */
+   @media (max-width: 992px) {
+      .hero h1 {
+         font-size: 3rem;
+      }
+   }
+
+   @media (max-width: 768px) {
+      .hero {
+         padding: 80px 0;
+      }
+
+      .hero h1 {
+         font-size: 2.5rem;
+      }
+
+      .hero .tagline {
+         font-size: 1rem;
+      }
+
+      .hero p {
+         font-size: 1rem;
+      }
+
+      .section-header h2 {
+         font-size: 2rem;
+      }
+
+      .feature-card {
+         padding: 25px;
+      }
+
+      .impact-card {
+         padding: 30px;
+      }
+   }
+
+   @media (max-width: 576px) {
+      .hero h1 {
+         font-size: 2rem;
+      }
+
+      .features-grid {
+         grid-template-columns: 1fr;
+      }
+
+      .section-header h2 {
+         font-size: 1.8rem;
+      }
+   }
+
+   /* Animation and Effects */
+   @keyframes float {
+      0% {
+         transform: translateY(0px);
+      }
+
+      50% {
+         transform: translateY(-10px);
+      }
+
+      100% {
+         transform: translateY(0px);
+      }
+   }
+
+   .floating {
+      animation: float 6s ease-in-out infinite;
+   }
+
+   .delay-1 {
+      animation-delay: 0.5s;
+   }
+
+   .delay-2 {
+      animation-delay: 1s;
+   }
+
+   .delay-3 {
+      animation-delay: 1.5s;
+   }
+
+   /* AOS Custom */
+   [data-aos="fade-up-sm"] {
+      transform: translateY(30px);
+      opacity: 0;
+      transition-property: transform, opacity;
+   }
+
+   [data-aos="fade-up-sm"].aos-animate {
+      transform: translateY(0);
+      opacity: 1;
+   }
+</style>
+<!-- Modern Hero Section -->
+<section class="hero" {% if product.banner_image %} style="background: linear-gradient(rgba(6,6,46,0.7), rgba(6,6,46,0.7)), 
+          url('{{ product.banner_image.url }}') no-repeat center center/cover;" {% endif %}>
+
+   <div class="hero-content">
+      <h1 data-aos="fade-up" data-aos-delay="100">{{ product.title }}</h1>
+
+      <span class="tagline" data-aos="fade-up" data-aos-delay="200">
+         {{ product.tagline }}
+      </span>
+
+      <p data-aos="fade-up" data-aos-delay="300">
+         {{ product.description }}
+      </p>
+
+   </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+   <div class="container">
+      <div class="section-header" data-aos="fade-up">
+         <h2>Key Modules</h2>
+      </div>
+
+      <div class="features-grid">
+
+         <!-- AHM Feature -->
+         <div class="feature-card" data-aos="fade-up-sm" data-aos-delay="100">
+            <div class="feature-icon" style="display: flex; justify-content: center; align-items: center;">
+               <img src="{{ product.module_icons.all.0.icon.url }}" alt="Aircraft Health Monitoring"
+                  style="width:58px;height:58px;object-fit:cover;border-radius:8px;">
+            </div>
+            <h3>Aircraft Health Monitoring (AHM)</h3>
+            <p><strong>Function:</strong> Continuously supervises onboard systems such as engines, hydraulics,
+               avionics, and electrical components.</p>
+            <ul>
+               <li>Detects early signs of engine deterioration</li>
+               <li>Employs machine learning for predictive diagnostics</li>
+               <li>Recommends proactive maintenance actions to avoid faults</li>
+               <li>Minimizes unscheduled downtime and enhances fleet readiness</li>
+            </ul>
+         </div>
+
+         <!-- APM Feature -->
+         <div class="feature-card" data-aos="fade-up-sm" data-aos-delay="200">
+            <div class="feature-icon" style="display: flex; justify-content: center; align-items: center;">
+               <img src="{{ product.module_icons.all.1.icon.url }}" alt="Aircraft Performance Monitoring"
+                  style="width:58px;height:58px;object-fit:cover;border-radius:8px;">
+            </div>
+            <h3>Aircraft Performance Monitoring (APM)</h3>
+            <p><strong>Function:</strong> Analyses collected flight data altitude, Exhaust gas temperature (EGT),
+               Fuel Flow, and other sensor inputs evaluate and optimize aircraft performance over time.</p>
+            <ul>
+               <li>AI models analyse historical and in-flight patterns to suggest fuel-saving flight behaviours</li>
+               <li>Benchmarks performance based on aircraft type and usage profiles</li>
+               <li>Generates efficiency metrics aligned with environmental standards</li>
+            </ul>
+         </div>
+
+         <!-- FOQA Feature -->
+         <div class="feature-card" data-aos="fade-up-sm" data-aos-delay="300">
+            <div class="feature-icon" style="display: flex; justify-content: center; align-items: center;">
+               <img src="{{ product.module_icons.all.2.icon.url }}" alt="Flight Operations Quality Assurance"
+                  style="width:58px;height:58px;object-fit:cover;border-radius:8px;">
+            </div>
+            <h3>Flight Operations Quality Assurance (FOQA)</h3>
+            <p><strong>Function:</strong> Consolidates data from flight recorders, sensors, and logs to monitor
+               safety and procedural adherence.</p>
+            <ul>
+               <li>Automates post-flight evaluations and anomaly detection</li>
+               <li>Analyses critical flight phases and flight exceedance</li>
+               <li>Produces in-depth safety and compliance reports</li>
+            </ul>
+         </div>
+
+         <!-- Fuel Analytics Feature -->
+         <div class="feature-card" data-aos="fade-up-sm" data-aos-delay="400">
+            <div class="feature-icon" style="display: flex; justify-content: center; align-items: center;">
+               <img src="{{ product.module_icons.all.3.icon.url }}" alt="Fuel Analytics"
+                  style="width:58px;height:58px;object-fit:cover;border-radius:8px;">
+            </div>
+            <h3>Fuel Analytics</h3>
+            <p><strong>Function:</strong> Tracks fuel usage trends, identifies inefficiencies, and supports
+               compliance with global emissions regulations.</p>
+            <ul>
+               <li>Monitors fuel burn rates and usage patterns across flights</li>
+               <li>Uses historical data to fine-tune fueling strategies</li>
+               <li>Supports emissions reporting aligned with CORSIA and ICAO norms</li>
+            </ul>
+         </div>
+
+      </div>
+   </div>
+</section>
+
+
+<!-- Real World Impact Section -->
+<section class="impact-section">
+   <div class="container">
+      <div class="impact-card" data-aos="zoom-in" style="background-color: #140a52;">
+         <span class="impact-label">Real-World Impact</span>
+         <h3 >FOQA Success Story</h3>
+         <p>FOQA data identified recurring delays in flap deployment and landing gear extension during final
+            approach, leading to
+            targeted pilot training that significantly reduced unstable approach occurrences and improved landing
+            consistency across the fleet.</p>
+      </div>
+   </div>
+</section>
+
+<!-- Why Choose Section -->
+<section class="why-choose">
+   <div class="container">
+      <div class="section-header" data-aos="fade-up">
+         <h2>Why ProHM+ Stands Out</h2>
+      </div>
+
+      <div class="benefits-grid">
+         <div class="benefit-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="benefit-icon">
+               <i class="fas fa-puzzle-piece"></i>
+            </div>
+            <h4>Seamless Integration & Customization</h4>
+            <p>Can be seamlessly integrated with existing servers and adapts to user-specific needs for a smooth,
+               tailored experience.</p>
+         </div>
+
+         <div class="benefit-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="benefit-icon">
+               <i class="fas fa-crosshairs"></i>
+            </div>
+            <h4>Military-Grade Accuracy</h4>
+            <p>Designed for defense aviation, with proven reliability across commercial use cases.</p>
+         </div>
+
+         <div class="benefit-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="benefit-icon">
+               <i class="fas fa-cubes"></i>
+            </div>
+            <h4>Modular Deployment</h4>
+            <p>Designed for defense aviation, with proven reliability across commercial use cases.</p>
+         </div>
+
+         <div class="benefit-card" data-aos="fade-up" data-aos-delay="400">
+            <div class="benefit-icon">
+               <i class="fas fa-brain"></i>
+            </div>
+            <h4>AI That Learns</h4>
+            <p>Continuously improves through data feedback loops, enhancing precision and decision-making.</p>
+         </div>
+
+         <div class="benefit-card" data-aos="fade-up" data-aos-delay="500">
+            <div class="benefit-icon">
+               <i class="fas fa-file-contract"></i>
+            </div>
+            <h4>Regulatory Support</h4>
+            <p>Complies with FAA, EASA, and ICAO safety and emissions guidelines.</p>
+         </div>
+      </div>
+   </div>
+</section>
+
+<!-- AOS JS -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+   AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100
+   });
+</script>
+
+{% endblock %}
