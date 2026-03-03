@@ -5288,7 +5288,8 @@ body {
 .stat-title {
     font-size: 1.25rem;
     color: #1f2937;
-    margin-bottom: 8px;
+    margin-top: 20px;
+    padding-top: 10px;
 }
 
 .stat-subtitle {
