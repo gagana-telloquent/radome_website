@@ -5,85 +5,160 @@
 {% block content %}
 
 
-    <style>
-        .feature-box {
-            background-color: #001531;
-            color: #00e0ff;
-            border-radius: 12px;
-            padding: 15px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 60px;
-            height: 60px;
-            margin-right: 15px;
+<style>
+    /* =====================================
+   BANNER TITLE
+===================================== */
+
+    .usecase-title {
+        color: #fff;
+        font-size: 48px;
+        font-weight: 700;
+        text-align: center;
+    }
+
+
+    /* =====================================
+   FEATURE BOX
+===================================== */
+
+    .feature-box {
+        background-color: #001531;
+        color: #00e0ff;
+        border-radius: 12px;
+        padding: 15px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        margin-right: 15px;
+    }
+
+    .feature-text h6 {
+        font-weight: 700;
+        color: #000;
+        margin-bottom: 5px;
+    }
+
+    .feature-text p {
+        margin: 0;
+        color: #333;
+    }
+
+    .feature-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 30px;
+    }
+
+
+    /* =====================================
+   MOBILE RESPONSIVE
+===================================== */
+
+    @media (max-width:768px) {
+
+        /* Banner title */
+        .usecase-title {
+            font-size: 28px;
+            line-height: 1.3;
+            padding: 0 15px;
         }
 
-        .feature-text h6 {
-            font-weight: 700;
-            color: #000;
-            margin-bottom: 5px;
+        /* Disable animations on mobile */
+        .text-anime-style-2,
+        .text-anime-style-2 span,
+        .image-anime,
+        .reveal,
+        .wow,
+        .fadeInUp {
+            animation: none !important;
+            transform: none !important;
+            opacity: 1 !important;
+            visibility: visible !important;
         }
 
-        .feature-text p {
-            margin: 0;
-            color: #333;
+        /* Ensure images always show */
+        .project-single-image img,
+        .project-query-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 10px;
         }
 
+        /* Stack layout */
+        .project-query-item {
+            display: block;
+        }
+
+        .project-query-img {
+            margin-top: 20px;
+        }
+
+        /* Fix banner text */
+        .page-header-box h1 {
+            font-size: 28px !important;
+            line-height: 1.3;
+            text-align: center;
+            margin-top: 40px !important;
+        }
+
+        /* Feature spacing */
         .feature-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
-    </style>
+
+    }
+</style>
 
 
+<!-- Page Header Start -->
+<div class="page-header parallaxie" {% if use_case.banner_image %}
+    style="background-image: url('{{ use_case.banner_image.url }}'); background-size: cover; background-position: center;"
+    {% endif %}>
 
-    <!-- Page Header Start -->
-    <div class="page-header parallaxie" {% if use_case.banner_image %}
-        style="background-image: url('{{ use_case.banner_image.url }}'); background-size: cover; background-position: center;"
-        {% endif %}>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <!-- Page Header Box Start -->
+                <div class="page-header-box">
+                    <h1 class="usecase-title" data-cursor="-opaque"
+                        style="margin-top: 50px; font-family: 'Inter', sans-serif;">
+                        <span>{{ use_case.title }}</span>
 
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-12">
-                    <!-- Page Header Box Start -->
-                    <div class="page-header-box">
-                        <h1 class="text-anime-style-2" data-cursor="-opaque"
-                            style="margin-top: 50px; font-family: 'Inter', sans-serif;">
-                            <span>{{ use_case.title }}</span>
+                    </h1>
+                    <!-- Add Inter font link in <head> if not already present -->
+                    <nav class="wow fadeInUp">
 
-                        </h1>
-                        <!-- Add Inter font link in <head> if not already present -->
-                        <nav class="wow fadeInUp">
-
-                        </nav>
-                    </div>
-                    <!-- Page Header Box End -->
+                    </nav>
                 </div>
+                <!-- Page Header Box End -->
             </div>
         </div>
     </div>
-    <!-- Page Header End -->
+</div>
+<!-- Page Header End -->
 
-    <!-- Page Project Single Start -->
-    <div class="page-project-single">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-4">
-                    <!-- Project Sidebar Start -->
-                    <div class="project-sidebar">
-                        <!-- Project detail Box Start -->
-                        <div class="project-detail-box">
-                            <!-- Project Detail Title Start -->
-                            <div class="project-detail-title">
-                                <h3>Use Case Details</h3>
-                            </div>
-                            <!-- Project Detail Title End -->
+<!-- Page Project Single Start -->
+<div class="page-project-single">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4">
+                <!-- Project Sidebar Start -->
+                <div class="project-sidebar">
+                    <!-- Project detail Box Start -->
+                    <div class="project-detail-box">
+                        <!-- Project Detail Title Start -->
+                        <div class="project-detail-title">
+                            <h3>Use Case Details</h3>
+                        </div>
+                        <!-- Project Detail Title End -->
 
-                            <div class="project-detail-list">
-                                <!-- Project Detail Item Start -->
-                                <!-- <div class="project-detail-item">
+                        <div class="project-detail-list">
+                            <!-- Project Detail Item Start -->
+                            <!-- <div class="project-detail-item">
                                     <div class="icon-box">
                                         <img src="images/sidebar-project-detail-1.svg" alt="">
                                     </div>
@@ -92,40 +167,40 @@
                                         <p>ronald richardson</p>
                                     </div>
                                 </div> -->
-                                <!-- Project Detail Item End -->
+                            <!-- Project Detail Item End -->
 
-                                <!-- Project Detail Item Start -->
-                                <div class="project-detail-item">
-                                    <div class="feature-box">
-                                        {% if use_case.tags_icon %}
-                                        <img src="{{ use_case.tags_icon.url }}" width="40">
-                                        {% endif %}
+                            <!-- Project Detail Item Start -->
+                            <div class="project-detail-item">
+                                <div class="feature-box">
+                                    {% if use_case.tags_icon %}
+                                    <img src="{{ use_case.tags_icon.url }}" width="40">
+                                    {% endif %}
 
-                                    </div>
-                                    <div class="project-detail-content">
-                                        <h3>Tags:</h3>
-                                        <p>{{ use_case.tags }}</p>
-                                    </div>
                                 </div>
-                                <!-- Project Detail Item End -->
-
-                                <!-- Project Detail Item Start -->
-                                <div class="project-detail-item">
-                                    <div class="feature-box">
-                                        {% if use_case.date_icon %}
-                                        <img src="{{ use_case.date_icon.url }}" width="40">
-                                        {% endif %}
-
-                                    </div>
-                                    <div class="project-detail-content">
-                                        <h3>Date:</h3>
-                                        <p>{{ use_case.date|date:"d M, Y" }}</p>
-                                    </div>
+                                <div class="project-detail-content">
+                                    <h3>Tags:</h3>
+                                    <p>{{ use_case.tags }}</p>
                                 </div>
-                                <!-- Project Detail Item End -->
+                            </div>
+                            <!-- Project Detail Item End -->
 
-                                <!-- Project Detail Item Start -->
-                                <!-- <div class="project-detail-item">
+                            <!-- Project Detail Item Start -->
+                            <div class="project-detail-item">
+                                <div class="feature-box">
+                                    {% if use_case.date_icon %}
+                                    <img src="{{ use_case.date_icon.url }}" width="40">
+                                    {% endif %}
+
+                                </div>
+                                <div class="project-detail-content">
+                                    <h3>Date:</h3>
+                                    <p>{{ use_case.date|date:"d M, Y" }}</p>
+                                </div>
+                            </div>
+                            <!-- Project Detail Item End -->
+
+                            <!-- Project Detail Item Start -->
+                            <!-- <div class="project-detail-item">
                                     <div class="icon-box">
                                         <img src="images/sidebar-project-detail-4.svg" alt="">
                                     </div>
@@ -134,255 +209,256 @@
                                         <p>$69,63,400</p>
                                     </div>
                                 </div> -->
-                                <!-- Project Detail Item End -->
+                            <!-- Project Detail Item End -->
 
-                                <!-- Project Detail Item Start -->
-                                <div class="project-detail-item">
+                            <!-- Project Detail Item Start -->
+                            <div class="project-detail-item">
+                                <div class="feature-box">
+                                    {% if use_case.location_icon %}
+                                    <img src="{{ use_case.location_icon.url }}" width="40">
+                                    {% endif %}
+                                </div>
+                                <div class="project-detail-content">
+                                    <h3>location:</h3>
+                                    <p>{{ use_case.location }}</p>
+                                </div>
+                            </div>
+                            <!-- Project Detail Item End -->
+                        </div>
+                    </div>
+                    <!-- Project detail Box End -->
+
+                    <!-- Sidebar CTA Box Start -->
+                    <div class="sidebar-cta-box wow fadeInUp" data-wow-delay="0.25s">
+                        <!-- Sidebar CTA Body Start -->
+                        <div class="sidebar-cta-Body">
+                            <!-- Sidebar CTA Content Start -->
+                            <div class="sidebar-cta-content">
+                                <h3>Need <span>help!</span></h3>
+                                <p>Got questions or need assistance with your Industry needs?</p>
+                            </div>
+                            <!-- Sidebar CTA Content End -->
+
+                            <!-- Sidebar CTA Contact List Start -->
+                            <div class="sidebar-cta-contact-list">
+                                <!-- Sidebar CTA Contact Item Start -->
+                                <div class="sidebar-cta-contact-item">
+                                    <div class="icon-box">
+                                        <i class="fa-solid fa-phone fa-2x" aria-label="Phone icon"
+                                            style="color: #e8e9eb;"></i>
+                                    </div>
+
+                                    <div class="cta-contact-item-title">
+                                        <h3>8762640093</h3>
+                                    </div>
+                                </div>
+                                <!-- Sidebar CTA Contact Item End -->
+
+                                <!-- Sidebar CTA Contact Item Start -->
+                                <div class="sidebar-cta-contact-item">
+                                    <div class="icon-box">
+                                        <i class="fa-solid fa-envelope fa-2x" aria-label="Email icon"
+                                            style="color: #e8e9eb;"></i>
+                                    </div>
+
+                                    <div class="cta-contact-item-title">
+                                        <h3>sales@radometech.com</h3>
+                                    </div>
+                                </div>
+                                <!-- Sidebar CTA Contact Item End -->
+                            </div>
+                            <!-- Sidebar CTA Contact List End -->
+                        </div>
+                        <!-- Sidebar CTA Body End -->
+                    </div>
+                    <!-- Sidebar CTA Box End -->
+                </div>
+                <!-- Project Sidebar End -->
+            </div>
+
+            <div class="col-lg-8">
+                <!-- Project Single Content Start -->
+                <div class="project-single-content">
+                    <!-- Project Single Image Start -->
+                    <div class="project-single-image">
+                        <figure>
+                            {% if use_case.challenge.image %}
+                            <img src="{{ use_case.challenge.image.url }}" alt="">
+                            {% endif %}
+
+                        </figure>
+                    </div>
+                    <!-- Project Single Image End -->
+
+                    <!-- Project Entry Start -->
+                    <div class="project-entry">
+                        <!-- Project Info Start -->
+                        <div class="project-info" style="font-family: 'Inter', sans-serif;">
+                            <h2>
+                                {{ use_case.challenge.title }}
+                            </h2>
+
+                            <p>
+                                {{ use_case.challenge.description|linebreaksbr }}
+                            </p>
+                        </div>
+
+
+                        <!-- Project Info End -->
+
+                        <!-- Project Goal Start -->
+                        <div class="project-goal" style="font-family: 'Inter', sans-serif;">
+                            <h2>
+                                {{ use_case.solution.title }}
+                            </h2>
+
+                            <p class="wow fadeInUp" data-wow-delay="0.2s" style="font-size: 20px;">
+                                {{ use_case.solution.description|linebreaksbr }}
+                            </p>
+                        </div>
+
+                        <!-- Project Goal Start -->
+
+                        <!-- Project Query Box Start -->
+                        <div class="project-query-box" style="font-family: 'Inter', sans-serif;">
+                            <!-- Project Query Item Start -->
+                            <div class="project-query-item">
+                                <!-- Project Query Content Start -->
+                                <div class="project-query-content">
+                                    <p class="wow fadeInUp" data-wow-delay="0.2s" style="font-size: 20px;">An
+                                        integrated AI agent then
+                                        communicates directly with the plant’s control systems (SCADA/PLC/Siemens
+                                        Edge Devices) to execute the adjustments automatically—all within a
+                                        one-minute window, ensuring consistent quality and operational efficiency.
+                                    </p>
+                                </div>
+                                <div class="project-query-img">
+                                    <figure class="image-anime reveal">
+                                        {% if use_case.solution.image %}
+                                        <img src="{{ use_case.solution.image.url }}" alt="">
+                                        {% endif %}
+                                    </figure>
+                                </div>
+                            </div>
+                            <!-- Project Query Box End -->
+                        </div>
+                        <div class="row mt-5">
+
+                            {% for feature in use_case.features.all %}
+                            <div class="col-md-6">
+                                <div class="feature-item">
                                     <div class="feature-box">
-                                        {% if use_case.location_icon %}
-                                        <img src="{{ use_case.location_icon.url }}" width="40">
+                                        {% if feature.icon %}
+                                        <img src="{{ feature.icon.url }}" alt="{{ feature.title }}" width="100">
                                         {% endif %}
                                     </div>
-                                    <div class="project-detail-content">
-                                        <h3>location:</h3>
-                                        <p>{{ use_case.location }}</p>
+                                    <div class="feature-text">
+                                        <h6>{{ feature.title }}</h6>
+                                        <p>{{ feature.description }}</p>
                                     </div>
                                 </div>
-                                <!-- Project Detail Item End -->
                             </div>
+                            {% endfor %}
                         </div>
-                        <!-- Project detail Box End -->
 
-                        <!-- Sidebar CTA Box Start -->
-                        <div class="sidebar-cta-box wow fadeInUp" data-wow-delay="0.25s">
-                            <!-- Sidebar CTA Body Start -->
-                            <div class="sidebar-cta-Body">
-                                <!-- Sidebar CTA Content Start -->
-                                <div class="sidebar-cta-content">
-                                    <h3>Need <span>help!</span></h3>
-                                    <p>Got questions or need assistance with your Industry needs?</p>
-                                </div>
-                                <!-- Sidebar CTA Content End -->
 
-                                <!-- Sidebar CTA Contact List Start -->
-                                <div class="sidebar-cta-contact-list">
-                                    <!-- Sidebar CTA Contact Item Start -->
-                                    <div class="sidebar-cta-contact-item">
-                                        <div class="icon-box">
-                                            <i class="fa-solid fa-phone fa-2x" aria-label="Phone icon"
-                                                style="color: #e8e9eb;"></i>
-                                        </div>
-
-                                        <div class="cta-contact-item-title">
-                                            <h3>8762640093</h3>
-                                        </div>
-                                    </div>
-                                    <!-- Sidebar CTA Contact Item End -->
-
-                                    <!-- Sidebar CTA Contact Item Start -->
-                                    <div class="sidebar-cta-contact-item">
-                                        <div class="icon-box">
-                                            <i class="fa-solid fa-envelope fa-2x" aria-label="Email icon"
-                                                style="color: #e8e9eb;"></i>
-                                        </div>
-
-                                        <div class="cta-contact-item-title">
-                                            <h3>sales@radometech.com</h3>
-                                        </div>
-                                    </div>
-                                    <!-- Sidebar CTA Contact Item End -->
-                                </div>
-                                <!-- Sidebar CTA Contact List End -->
-                            </div>
-                            <!-- Sidebar CTA Body End -->
-                        </div>
-                        <!-- Sidebar CTA Box End -->
-                    </div>
-                    <!-- Project Sidebar End -->
-                </div>
-
-                <div class="col-lg-8">
-                    <!-- Project Single Content Start -->
-                    <div class="project-single-content">
-                        <!-- Project Single Image Start -->
-                        <div class="project-single-image">
-                            <figure class="image-anime reveal">
-                                {% if use_case.challenge.image %}
-                                <img src="{{ use_case.challenge.image.url }}" alt="">
-                                {% endif %}
-
-                            </figure>
-                        </div>
-                        <!-- Project Single Image End -->
-
-                        <!-- Project Entry Start -->
-                        <div class="project-entry">
-                            <!-- Project Info Start -->
-                            <div class="project-info" style="font-family: 'Inter', sans-serif;">
-                                <h2 class="text-anime-style-2">
-                                    <span>{{ use_case.challenge.title }}</span>
+                        <div class="our-faq-section" style="font-family: 'Inter', sans-serif;">
+                            <!-- Section Title Start -->
+                            <div class="section-title">
+                                <h2>
+                                    Impact
                                 </h2>
-
-                                <p class="wow fadeInUp" data-wow-delay="0.2s" style="font-size: 20px;">
-                                    {{ use_case.challenge.description|linebreaksbr }}
-                                </p>
                             </div>
+                            <!-- Section Title End -->
 
 
-                            <!-- Project Info End -->
+                            <!-- FAQ Accordion Start -->
+                            <div class="faq-accordion accordion" id="faqaccordion">
 
-                            <!-- Project Goal Start -->
-                            <div class="project-goal" style="font-family: 'Inter', sans-serif;">
-                                <h2 class="text-anime-style-2">
-                                    <span>{{ use_case.solution.title }}</span>
-                                </h2>
-
-                                <p class="wow fadeInUp" data-wow-delay="0.2s" style="font-size: 20px;">
-                                    {{ use_case.solution.description|linebreaksbr }}
-                                </p>
-                            </div>
-
-                            <!-- Project Goal Start -->
-
-                            <!-- Project Query Box Start -->
-                            <div class="project-query-box" style="font-family: 'Inter', sans-serif;">
-                                <!-- Project Query Item Start -->
-                                <div class="project-query-item">
-                                    <!-- Project Query Content Start -->
-                                    <div class="project-query-content">
-                                        <p class="wow fadeInUp" data-wow-delay="0.2s" style="font-size: 20px;">An
-                                            integrated AI agent then
-                                            communicates directly with the plant’s control systems (SCADA/PLC/Siemens
-                                            Edge Devices) to execute the adjustments automatically—all within a
-                                            one-minute window, ensuring consistent quality and operational efficiency.
-                                        </p>
-                                    </div>
-                                    <div class="project-query-img">
-                                        <figure class="image-anime reveal">
-                                            {% if use_case.solution.image %}
-                                            <img src="{{ use_case.solution.image.url }}" alt="">
-                                            {% endif %}
-                                        </figure>
-                                    </div>
-                                </div>
-                                <!-- Project Query Box End -->
-                            </div>
-                            <div class="row mt-5">
-
-                                {% for feature in use_case.features.all %}
-                                <div class="col-md-6">
-                                    <div class="feature-item">
-                                        <div class="feature-box">
-                                            {% if feature.icon %}
-                                            <img src="{{ feature.icon.url }}" alt="{{ feature.title }}" width="100">
-                                            {% endif %}
-                                        </div>
-                                        <div class="feature-text">
-                                            <h6>{{ feature.title }}</h6>
-                                            <p>{{ feature.description }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-
-
-                            <div class="our-faq-section" style="font-family: 'Inter', sans-serif;">
-                                <!-- Section Title Start -->
-                                <div class="section-title">
-                                    <h2 class="text-anime-style-2" data-cursor="-opaque">
-                                        <span>Impact </span>
+                                <!-- Item 1 -->
+                                <div class="accordion-item wow fadeInUp">
+                                    <h2 class="accordion-header" id="heading1">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false"
+                                            aria-controls="collapse1">
+                                            Consistent Oil Quality:
+                                        </button>
                                     </h2>
+                                    <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="heading1"
+                                        data-bs-parent="#faqaccordion">
+                                        <div class="accordion-body">
+                                            <p>AI ensures precise control, maintaining high production standards.
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <!-- Section Title End -->
 
-
-                                <!-- FAQ Accordion Start -->
-                                <div class="faq-accordion accordion" id="faqaccordion">
-
-                                    <!-- Item 1 -->
-                                    <div class="accordion-item wow fadeInUp">
-                                        <h2 class="accordion-header" id="heading1">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#collapse1"
-                                                aria-expanded="false" aria-controls="collapse1">
-                                                Consistent Oil Quality:
-                                            </button>
-                                        </h2>
-                                        <div id="collapse1" class="accordion-collapse collapse"
-                                            aria-labelledby="heading1" data-bs-parent="#faqaccordion">
-                                            <div class="accordion-body">
-                                                <p>AI ensures precise control, maintaining high production standards.
-                                                </p>
-                                            </div>
+                                <!-- Item 2 -->
+                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.2s">
+                                    <h2 class="accordion-header" id="heading2">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false"
+                                            aria-controls="collapse2">
+                                            Operational Efficiency:
+                                        </button>
+                                    </h2>
+                                    <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2"
+                                        data-bs-parent="#faqaccordion">
+                                        <div class="accordion-body">
+                                            <p>Reduction in manual checks and adjustments accelerates processing
+                                                time.</p>
                                         </div>
                                     </div>
-
-                                    <!-- Item 2 -->
-                                    <div class="accordion-item wow fadeInUp" data-wow-delay="0.2s">
-                                        <h2 class="accordion-header" id="heading2">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#collapse2"
-                                                aria-expanded="false" aria-controls="collapse2">
-                                                Operational Efficiency:
-                                            </button>
-                                        </h2>
-                                        <div id="collapse2" class="accordion-collapse collapse"
-                                            aria-labelledby="heading2" data-bs-parent="#faqaccordion">
-                                            <div class="accordion-body">
-                                                <p>Reduction in manual checks and adjustments accelerates processing
-                                                    time.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Item 3 -->
-                                    <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">
-                                        <h2 class="accordion-header" id="heading3">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#collapse3"
-                                                aria-expanded="false" aria-controls="collapse3">
-                                                Process Optimization:
-                                            </button>
-                                        </h2>
-                                        <div id="collapse3" class="accordion-collapse collapse"
-                                            aria-labelledby="heading3" data-bs-parent="#faqaccordion">
-                                            <div class="accordion-body">
-                                                <p>Data-driven decisions enable smarter energy use and process
-                                                    refinement.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Item 4 -->
-                                    <div class="accordion-item wow fadeInUp" data-wow-delay="0.6s">
-                                        <h2 class="accordion-header" id="heading4">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#collapse4"
-                                                aria-expanded="false" aria-controls="collapse4">
-                                                Scalability:
-                                            </button>
-                                        </h2>
-                                        <div id="collapse4" class="accordion-collapse collapse"
-                                            aria-labelledby="heading4" data-bs-parent="#faqaccordion">
-                                            <div class="accordion-body">
-                                                <p>Designed for easy adaptation to other production environments with
-                                                    moisture-sensitive variables.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div>
-                                <!-- FAQ Accordion End -->
 
-                                <!-- FAQ Accordion End -->
+                                <!-- Item 3 -->
+                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">
+                                    <h2 class="accordion-header" id="heading3">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false"
+                                            aria-controls="collapse3">
+                                            Process Optimization:
+                                        </button>
+                                    </h2>
+                                    <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3"
+                                        data-bs-parent="#faqaccordion">
+                                        <div class="accordion-body">
+                                            <p>Data-driven decisions enable smarter energy use and process
+                                                refinement.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Item 4 -->
+                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.6s">
+                                    <h2 class="accordion-header" id="heading4">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false"
+                                            aria-controls="collapse4">
+                                            Scalability:
+                                        </button>
+                                    </h2>
+                                    <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4"
+                                        data-bs-parent="#faqaccordion">
+                                        <div class="accordion-body">
+                                            <p>Designed for easy adaptation to other production environments with
+                                                moisture-sensitive variables.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                            <!-- Our FAQ Section End -->
+                            <!-- FAQ Accordion End -->
+
+                            <!-- FAQ Accordion End -->
                         </div>
+                        <!-- Our FAQ Section End -->
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Page Project Single End -->
-         
-{% endblock %}
+    </div>
+    <!-- Page Project Single End -->
+
+
+    {% endblock %}

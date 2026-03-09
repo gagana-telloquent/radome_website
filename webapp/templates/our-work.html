@@ -114,7 +114,7 @@
             {% for card in ai_core_cards %}
             <div class="col-lg-4 col-md-6">
                <div class="card image-bottom-card" style="background-image: url('{{ card.background_image.url }}');
-                        height: 700x !important;">
+                        height: 500px !important;">
 
                   <div class="card-content">
                      <h2>{{ card.title }}</h2>
@@ -181,6 +181,28 @@
             font-size: 17px;
             line-height: 1.7;
          }
+      }
+
+      @media (max-width:768px) {
+
+         .solutions {
+            display: block !important;
+            text-align: justify !important;
+            text-justify: inter-word;
+            font-size: 16px !important;
+            line-height: 1.7;
+            padding: 0 15px;
+
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            -ms-hyphens: auto;
+
+            overflow-wrap: anywhere;
+            word-break: normal;
+            letter-spacing: 0;
+            word-spacing: 0;
+         }
+
       }
    </style>
    {% endblock %}

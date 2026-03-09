@@ -256,108 +256,274 @@
 </div>
 <!-- Scroll To Top End -->
 <style>
-    
-    .insight-intro-section {
-    background: #f4f6fb; /* light elegant background */
-    padding: 80px 0;
-}
+    /* ================================
+   HERO BANNER TITLE CENTER FIX
+================================ */
 
-.insight-intro-box {
-    background: linear-gradient(135deg, #0b0f3f 0%, #140a52 100%);
-    color: #ffffff;
-    padding: 50px 60px;
-    border-radius: 20px;
-    font-size: 22px;
-    line-height: 1.8;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-}
+.pbmit-title-bar-wrapper{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 
-    .insight-intro-box p {
-        margin: 0;
-        position: relative;
-        z-index: 2;
-    }
-
-    .team-member-item {
-        position: relative;
-        overflow: hidden;
-        border-radius: 12px;
-        margin-bottom: 30px;
-    }
-
-    .team-image-wrapper {
-        position: relative;
-        overflow: hidden;
-    }
-
-    .team-image {
-        width: 70%;
-        display: block;
-        border-radius: 12px;
-        transition: transform 0.3s ease;
-        margin: 0 auto;
-    }
-
-    .team-member-item:hover .team-image {
-        transform: scale(1.05);
-    }
-.team-overlay {
-    position: absolute;
-    top: 0;
-    left: 50%;              /* move to center */
-    transform: translateX(-50%);  /* center align */
-    width: 70%;             /* same as image */
-    height: 100%;
-    background: rgba(24, 6, 68, 0.55);
-    color: #fff;
-    padding: 20px;
-    opacity: 0;
-    transition: opacity 0.4s ease-in-out;
-    overflow-y: auto;
-    border-radius: 12px;
+    position: relative;
+    height: 450px;
 
     display: flex;
-    justify-content: center;
     align-items: center;
-    text-align: center;
+    justify-content: center;
 }
 
-    .team-member-item:hover .team-overlay {
-        opacity: 1;
-    }
-
-    .team-overlay h3 {
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 5px;
-        color: #34d399;
-        /* Tailwind Teal-400 */
-    }
-
-    .team-overlay p {
-        font-size: 14px;
-        line-height: 1.4;
-        margin-bottom: 5px;
-    }
-    .nav-pills .nav-link {
-    color: #0b0f3f;
-    font-weight: 600;
-    margin: 0 10px;
-    border-radius: 30px;
-    padding: 10px 25px;
+.pbmit-title-bar-content{
+    width:100%;
+    text-align:center;
+    position:relative;
+    z-index:2;
 }
 
-.nav-pills .nav-link.active {
-    background: #0b0f3f;
-    color: #fff;
-    font-size: 20px;
+.pbmit-tbar-title{
+    color:#ffffff;
+    font-size:52px;
+    font-weight:700;
+    text-align:center;
+    text-shadow:0 4px 20px rgba(0,0,0,0.6);
 }
-.mv-description {
-    font-size: 20px;
-    line-height: 1.8;
-    color: #444;
-    max-width: 90%;
+
+/* ================================
+   INTRO SECTION
+================================ */
+
+.insight-intro-section{
+    background:#f4f6fb;
+    padding:80px 0;
 }
+
+.insight-intro-box{
+    background:linear-gradient(135deg,#0b0f3f 0%,#140a52 100%);
+    color:#ffffff;
+    padding:50px 60px;
+    border-radius:20px;
+    font-size:22px;
+    line-height:1.9;
+    box-shadow:0 25px 50px rgba(0,0,0,0.15);
+}
+
+.insight-intro-box p{
+    margin:0;
+    position:relative;
+    z-index:2;
+
+    /* justify text */
+    text-align:justify;
+    text-justify:inter-word;
+}
+
+
+/* ================================
+   TEAM SECTION
+================================ */
+
+.team-member-item{
+    position:relative;
+    overflow:hidden;
+    border-radius:12px;
+    margin-bottom:40px;
+}
+
+.team-image-wrapper{
+    position:relative;
+    overflow:hidden;
+}
+
+/* smaller team photos */
+.team-image{
+    width:55%;
+    display:block;
+    margin:0 auto;
+    border-radius:12px;
+    transition:transform .3s ease;
+}
+
+.team-member-item:hover .team-image{
+    transform:scale(1.05);
+}
+
+.team-overlay{
+    position:absolute;
+    top:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:55%;
+    height:100%;
+    background:rgba(24,6,68,0.55);
+    color:#fff;
+    padding:20px;
+    opacity:0;
+    transition:opacity .4s ease-in-out;
+    overflow-y:auto;
+    border-radius:12px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.team-member-item:hover .team-overlay{
+    opacity:1;
+}
+
+.team-overlay h3{
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:5px;
+    color:#34d399;
+}
+
+.team-overlay p{
+    font-size:14px;
+    line-height:1.5;
+}
+
+
+/* ================================
+   TABS
+================================ */
+
+.nav-pills .nav-link{
+    color:#0b0f3f;
+    font-weight:600;
+    margin:0 10px;
+    border-radius:30px;
+    padding:10px 25px;
+}
+
+.nav-pills .nav-link.active{
+    background:#0b0f3f;
+    color:#fff;
+    font-size:20px;
+}
+
+
+/* ================================
+   DESCRIPTION TEXT
+================================ */
+
+.mv-description{
+    font-size:20px;
+    line-height:1.8;
+    color:#444;
+    max-width:90%;
+}
+
+
+/* =====================================
+   MOBILE RESPONSIVE FIX
+===================================== */
+
+@media (max-width:768px){
+
+/* HERO BANNER */
+
+.pbmit-title-bar-wrapper{
+    height:260px !important;
+}
+
+.pbmit-tbar-title{
+    font-size:28px !important;
+    text-align:center;
+}
+
+
+/* INTRO SECTION */
+
+.insight-intro-section{
+    padding:40px 20px !important;
+}
+
+.insight-intro-box{
+    padding:30px 20px !important;
+    font-size:16px !important;
+    line-height:1.7 !important;
+    border-radius:15px;
+}
+
+
+/* =========================
+   TAB SWITCH MOBILE
+========================= */
+
+#mvTab{
+    display:flex;
+    justify-content:center;
+    flex-wrap:nowrap;
+    gap:10px;
+}
+
+#mvTab .nav-item{
+    flex:1;
+}
+
+#mvTab .nav-link{
+    width:100%;
+    font-size:14px;
+    padding:10px;
+    text-align:center;
+}
+
+
+/* TAB CONTENT STACK */
+
+.tab-pane .row{
+    flex-direction:column;
+}
+
+.tab-pane img{
+    margin-top:20px;
+    width:100%;
+}
+
+
+/* DESCRIPTION */
+
+.mv-description{
+    font-size:17px !important;
+    line-height:1.7;
+    max-width:100%;
+    padding:0 10px;
+}
+
+
+/* VALUE CARDS */
+
+.tab-pane .col-lg-6{
+    width:100%;
+}
+
+
+/* =========================
+   TEAM SECTION MOBILE
+========================= */
+
+.our-team h2{
+    font-size:32px !important;
+}
+
+.team-image{
+    width:75% !important;
+}
+
+.team-overlay{
+    width:75% !important;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.team-member-item{
+    margin-bottom:40px;
+}
+
+}
+
 </style>
 
 <!-- Scroll To Top -->

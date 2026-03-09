@@ -102,19 +102,27 @@
                 </div>
 
                 <!-- Image -->
-                <div class="mb-6" id="imageField">
-                    <label class="block font-semibold mb-2">
-                        Image
-                    </label>
+<div class="mb-6" id="imageField">
+    <label class="block font-semibold mb-2">
+        Image
+    </label>
 
-                    {{ form.image }}
+    {{ form.image }}
 
-                    {% if form.image.errors %}
-                    <p class="text-red-600 text-sm mt-1">
-                        {{ form.image.errors }}
-                    </p>
-                    {% endif %}
-                </div>
+    <!-- LOGO CHECKBOX -->
+    <div class="mt-3 flex items-center gap-2">
+        {{ form.is_logo }}
+        <label class="text-sm text-gray-700">
+            This image is a logo
+        </label>
+    </div>
+
+    {% if form.image.errors %}
+    <p class="text-red-600 text-sm mt-1">
+        {{ form.image.errors }}
+    </p>
+    {% endif %}
+</div>
 
                 <!-- Buttons -->
                 <div class="flex justify-between mt-8 pt-6 border-t border-gray-200">

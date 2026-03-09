@@ -285,10 +285,19 @@ class BlogFAQInline(admin.TabularInline):
 @admin.register(BlogAuthor)
 class BlogAuthorAdmin(admin.ModelAdmin):
     list_display = ("name",)
-
 @admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):
-    list_display = ("title", "author", "created_at", "is_published")
-    prepopulated_fields = {"slug": ("title",)}
-    inlines = [BlogSectionInline, BlogFAQInline]
+    list_display = (
+        "title",
+        "author",
+        "published_at",
+        "updated_at",
+        "is_published",
+    )
 
+    list_filter = ("is_published", "published_at")
+    search_fields = ("title", "meta_title", "meta_keywords")
+
+    prepopulated_fields = {"slug": ("title",)}
+
+    inlines = [BlogSectionInline, BlogFAQInline]

@@ -11,6 +11,7 @@ from django.db.models import Max
 from django.db.models import F
 import json
 from django.http import JsonResponse
+from django.utils import timezone
 
 
 
@@ -157,7 +158,12 @@ def insights(request):
 def blog(request):
     hero = PageBanner.objects.filter(page="blog").first()
 
-    posts = BlogPost.objects.filter(is_published=True)
+    from django.utils import timezone
+
+    posts = BlogPost.objects.filter(
+        is_published=True,
+        published_at__lte=timezone.now()
+    ).order_by("-published_at")
 
     context = {
         "hero": hero,
@@ -166,17 +172,18 @@ def blog(request):
 
     return render(request, "blog.html", context)
 
+
 from django.http import Http404
 
 def blog_detail(request, slug):
     post = get_object_or_404(BlogPost, slug=slug)
 
     preview = request.GET.get("preview") == "1"
-
-    # Draft protection
-    if not post.is_published:
+ # Hide draft or scheduled posts
+    if not post.is_published or (post.published_at and post.published_at > timezone.now()):
         if not (preview and request.user.is_authenticated):
             raise Http404("Post not found")
+
 
     sections = post.sections.all()
     faqs = post.faqs.all()
@@ -231,6 +238,8 @@ from django.db.models import Q
 
 @login_required
 def blog_dashboard(request):
+    now = timezone.now()
+
     posts = BlogPost.objects.select_related('author') \
         .prefetch_related('sections') \
         .order_by('-created_at')
@@ -242,21 +251,39 @@ def blog_dashboard(request):
             Q(title__icontains=search_query) |
             Q(short_description__icontains=search_query)
         )
-
     # ---- FILTER ----
     status_filter = request.GET.get('status')
+
     if status_filter == "published":
-        posts = posts.filter(is_published=True)
+        posts = posts.filter(
+            is_published=True,
+            published_at__lte=timezone.now()
+        )
+
     elif status_filter == "draft":
         posts = posts.filter(is_published=False)
 
+    elif status_filter == "scheduled":
+        posts = posts.filter(
+            is_published=True,
+            published_at__gt=timezone.now()
+        )
+
     # ---- COUNTS ----
     total_posts = BlogPost.objects.count()
-    published_count = BlogPost.objects.filter(is_published=True).count()
+    published_count = BlogPost.objects.filter(
+    is_published=True,
+    published_at__lte=timezone.now()
+    ).count()
     draft_count = BlogPost.objects.filter(is_published=False).count()
+    scheduled_count = BlogPost.objects.filter(
+    is_published=True,
+    published_at__gt=timezone.now()
+    ).count()
+
 
     # ---- PAGINATION ----
-    paginator = Paginator(posts, 5)  # 5 per page
+    paginator = Paginator(posts, 50)  # 5 per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -266,6 +293,7 @@ def blog_dashboard(request):
         'posts_count': total_posts,
         'published_count': published_count,
         'draft_count': draft_count,
+         'scheduled_count': scheduled_count,
         'status_filter': status_filter,
         'search_query': search_query,
     })
@@ -277,6 +305,10 @@ def create_post(request):
         form = BlogPostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
+
+            # Auto publish time
+            if post.is_published and not post.published_at:
+                post.published_at = timezone.now()
 
             base_slug = slugify(post.title)
             slug = base_slug
@@ -307,6 +339,9 @@ def edit_blog_post(request, post_id):
         form = BlogPostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             updated_post = form.save(commit=False)
+            # Auto publish time
+            if updated_post.is_published and not updated_post.published_at:
+                updated_post.published_at = timezone.now()
 
             # Unique slug logic (excluding current post)
             base_slug = slugify(updated_post.title)
@@ -324,6 +359,7 @@ def edit_blog_post(request, post_id):
             return redirect("blog_dashboard")
     else:
         form = BlogPostForm(instance=post)
+        
 
     return render(request, "blog/edit_blog_post.html", {
         "form": form,

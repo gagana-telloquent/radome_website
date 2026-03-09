@@ -1,0 +1,133 @@
+/* ======================================
+   RADOME CLEAN MOBILE FIX
+====================================== */
+
+@media (max-width: 1199px) {
+
+    body {
+        overflow-x: hidden !important;
+    }
+
+    .hero-section {
+        height: auto !important;
+        min-height: auto !important;
+        padding: 60px 20px !important;
+    }
+
+    .hero-content {
+        margin-left: 0 !important;
+        max-width: 100% !important;
+    }
+
+    .swiper,
+    .swiper-wrapper,
+    .swiper-slide {
+        height: auto !important;
+    }
+
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+}
+
+@media (max-width: 1199px) {
+
+    .hero-section {
+        min-height: auto !important;
+        padding: 80px 20px !important;
+    }
+
+    .hero-content {
+        margin-left: 0 !important;
+        margin-top: 40px !important;
+        padding: 15px 10px !important;
+        max-width: 100% !important;
+        border-radius: 0 !important;
+    }
+
+    .hero-content h1 {
+        font-size: 28px !important;
+    }
+
+    .hero-content p {
+        font-size: 15px !important;
+    }
+
+}
+
+/* ===== FIX: Footer copyright not visible on mobile ===== */
+
+@media (max-width: 768px) {
+
+  footer .row.align-items-center {
+    display: flex !important;
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+
+  footer .row.align-items-center > div {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  footer .col-md-6.text-md-end {
+    margin-top: 10px !important;
+  }
+
+}
+/* ===== Footer mobile fix ===== */
+
+@media (max-width: 768px) {
+
+  footer .row.align-items-center {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+
+  footer .row.align-items-center > div {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+
+
+}
+
+
+/* ===== Proper Mobile Menu Styling ===== */
+@media (max-width: 991px) {
+
+  #pbmit-menu {
+    position: fixed !important;
+    top: 0;
+    right: 0;
+    width: 80%;
+    height: 100vh;
+    background: #ffffff;
+    z-index: 9999;
+    padding: 60px 20px;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  #pbmit-menu.show {
+    transform: translateX(0);
+  }
+
+  /* Background overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 9998;
+    display: none;
+  }
+
+  body.menu-open::before {
+    display: block;
+  }
+}
+

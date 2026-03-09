@@ -92,38 +92,55 @@
                             {% endif %}
                         </div>
 
-                        <!-- Author -->
-                        <div>
-                            <label class="block font-semibold mb-2">
-                                👤 Author <span class="text-red-500">*</span>
-                            </label>
+<!-- Author -->
+<div>
+    <label class="block font-semibold mb-2">
+        👤 Author <span class="text-red-500">*</span>
+    </label>
 
-                            <div class="flex gap-3">
-                                <div class="flex-1">
-                                    {{ form.author }}
-                                </div>
-                                <a href="{% url 'create_author' %}" target="_blank"
-                                    class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-5 py-2 rounded-lg shadow">
-                                    + Add Author
-                                </a>
+    <div class="flex gap-3">
+        <div class="flex-1">
+            {{ form.author }}
+        </div>
 
-                            </div>
+        <a href="{% url 'create_author' %}" target="_blank"
+            class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-5 py-2 rounded-lg shadow">
+            + Add Author
+        </a>
+    </div>
 
-                            {% if form.author.errors %}
-                            <p class="text-red-600 text-sm mt-1">
-                                {{ form.author.errors }}
-                            </p>
-                            {% endif %}
-                        </div>
+    {% if form.author.errors %}
+    <p class="text-red-600 text-sm mt-1">
+        {{ form.author.errors }}
+    </p>
+    {% endif %}
+</div>
 
+<!-- Publish Date -->
+<div>
+    <label class="block font-semibold mb-2">
+        📅 Publish Date
+    </label>
+    {{ form.published_at }}
+<p class="text-xs text-gray-500 mt-1">
+    Leave empty to publish immediately.  
+    Set a future date to schedule publishing.
+</p>
 
-                        <!-- Publish Toggle -->
-                        <div class="flex items-center space-x-4">
-                            {{ form.is_published }}
-                            <span class="font-medium text-gray-700">
-                                Publish immediately
-                            </span>
-                        </div>
+    {% if form.published_at.errors %}
+    <p class="text-red-600 text-sm mt-1">
+        {{ form.published_at.errors }}
+    </p>
+    {% endif %}
+</div>
+
+<!-- Publish Toggle -->
+<div class="flex items-center space-x-4">
+    {{ form.is_published }}
+<span class="font-medium text-gray-700">
+    Publish this post
+</span>
+</div>
 
                     </div>
 
@@ -204,6 +221,27 @@
         });
     }
 </script>
+<script>
+const publishToggle = document.querySelector('input[name="is_published"]');
+const publishDate = document.querySelector('input[name="published_at"]');
 
+function togglePublishDate() {
+
+    if (publishToggle.checked) {
+        publishDate.required = true;   // require date when publishing
+    } else {
+        publishDate.required = false;  // not required for draft
+        publishDate.value = "";        // clear value
+    }
+
+}
+
+// run on page load
+if (publishToggle && publishDate) {
+    togglePublishDate();
+    publishToggle.addEventListener("change", togglePublishDate);
+}
+</script>
 
 {% endblock %}
+

@@ -118,6 +118,7 @@ class BlogPostForm(forms.ModelForm):
             'meta_title',
             'meta_description',
             'meta_keywords',
+            'published_at', 
             'is_published'
         ]
 
@@ -156,7 +157,14 @@ class BlogPostForm(forms.ModelForm):
                 'class': 'w-full px-4 py-3 border rounded-lg',
                 'placeholder': 'Comma separated keywords'
             }),
-
+'published_at': forms.DateTimeInput(
+    format='%Y-%m-%dT%H:%M',
+    attrs={
+        'type': 'datetime-local',
+        'step': '1',
+        'class': 'w-full px-4 py-3 border rounded-lg'
+    }
+),
             'is_published': forms.CheckboxInput(attrs={
                 'class': 'h-5 w-5 text-purple-600'
             }),
@@ -202,7 +210,8 @@ class BlogSectionForm(forms.ModelForm):
             'order',
             'title',
             'content',
-            'image'
+            'image',
+            'is_logo' ,
         ]
 
         widgets = {
@@ -229,6 +238,9 @@ class BlogSectionForm(forms.ModelForm):
             'image': forms.ClearableFileInput(attrs={
                 'class': 'block w-full text-sm'
             }),
+            'is_logo': forms.CheckboxInput(attrs={
+    'class': 'h-5 w-5 text-purple-600'
+}),
         }
 
     def clean_order(self):

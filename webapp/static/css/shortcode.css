@@ -11552,7 +11552,20 @@ body.rtl .pbmit-portfolio-style-4 .pbminfotech-titlebox {
 	padding-bottom: 40px;
 	padding-left: 150px;
 }
+@media (max-width:768px){
 
+.pbmit-title-bar-content-inner{
+    width:100%;
+    text-align:center;
+    display:flex;
+    align-items:center;
+
+    padding-bottom:40px;
+    padding-left:0 !important;   /* remove left padding for mobile */
+    padding-right:0 !important;
+}
+
+}
 .pbmit-title-bar-content .pbmit-tbar-subtitle {
 	padding-top: 5px;
 	margin-bottom: 10px;

@@ -29,7 +29,7 @@
         <div class="blog-meta">
             <bold> <span>By {{ post.author.name }}</span></bold>
             <span class="meta-dot"> | </span>
-            <span>{{ post.created_at|date:"F d, Y" }}</span>
+            <span>{{ post.published_at|date:"F d, Y" }}</span>
         </div>
 
         <h1 class="blog-title">{{ post.title|safe }}</h1>
@@ -69,9 +69,8 @@
 
         {% elif section.section_type == "image" %}
         {% if section.image %}
-        <img src="{{ section.image.url }}" class="blog-image">
+        <img src="{{ section.image.url }}" class="blog-image {% if section.is_logo %}logo-image{% endif %}">
         {% endif %}
-
         {% endif %}
 
         {% endfor %}
@@ -106,7 +105,7 @@
     .blog-container {
         width: 100%;
         max-width: 720px;
-        margin-top: 10px;
+        margin-top: 40px;
     }
 
     /* ================= META ================= */
@@ -118,7 +117,7 @@
 
     /* ================= H1 ================= */
     .blog-title {
-        font-size: 34px;
+        font-size: 38px;
         font-weight: 700;
         line-height: 1.3;
         color: #111;
@@ -126,21 +125,21 @@
 
     /* ================= H2 ================= */
     .blog-h2 {
-        font-size: 30px;
+        font-size: 32px;
         font-weight: 600;
         color: #111;
     }
 
     /* ================= H3 ================= */
     .blog-h3 {
-        font-size: 26px;
+        font-size: 28px;
         font-weight: 600;
         color: #25272b;
     }
 
     /* ================= CONTENT ================= */
     .blog-content {
-        font-size: 17px;
+        font-size: 20px;
         line-height: 1.75;
         margin-bottom: 14px;
         color: #444;
@@ -149,6 +148,7 @@
 
     .blog-content p {
         margin: 0 0 0 0 !important;
+        font-size: 20px !important;
     }
 
     /* ================= LISTS ================= */
@@ -168,35 +168,34 @@
 
     .blog-content li {
         display: list-item !important;
-        margin-bottom: 5px;
+        padding-top: 0px !important;
+        font-size: 20px;
     }
 
     /* ================= IMAGE ================= */
     .blog-image {
         width: 100%;
-        margin: 20px 0;
-        border-radius: 8px;
+        height: auto;
+        display: block;
     }
 
-    /* ================= CONCLUSION ================= */
-    .blog-conclusion {
-        background: #f4f6fb;
-        padding: 18px 22px;
-        border-left: 4px solid #140a52;
-        border-radius: 6px;
-        margin: 24px 0;
-        font-size: 17px;
-        line-height: 1.7;
-        text-align: justify;
+    .logo-image {
+        max-width: 200px;
+        height: auto;
+        display: block;
+        margin: 10px 0 25px 0;
     }
+
+
 
     /* ================= FAQ ================= */
     .blog-faq {
         margin-top: 30px;
+        font-size: 20px;
     }
 
     .faq-question {
-        font-size: 17px;
+        font-size: 20px;
         font-weight: 600;
         margin-top: 12px;
         margin-bottom: 5px;
@@ -215,7 +214,7 @@
         display: inline-block;
         background: #140a52;
         color: #fff;
-        padding: 20px 26px;
+        padding: 20px;
         border-radius: 6px;
         font-weight: 600;
         text-decoration: none;
@@ -282,6 +281,8 @@
         opacity: 1 !important;
         transform: none !important;
         animation: none !important;
+        padding-top: 10px !important;
+
     }
 
     /* ================= BLOG CONTENT LINKS ================= */
@@ -311,7 +312,7 @@
     .blog-h3 {
         scroll-margin-top: 110px;
     }
-    
+
 
     /* ================= TABLE OF CONTENTS ================= */
 
@@ -356,6 +357,55 @@
         color: #333;
         margin-right: 6px;
         padding-left: 10px;
+    }
+
+    /* ===== MOBILE BLOG FIX ===== */
+    @media (max-width:768px) {
+
+        .blog-wrapper {
+            padding-top: 120px;
+            /* prevents navbar overlap */
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+
+        .blog-container {
+            max-width: 100%;
+        }
+
+        /* Author + Date */
+        .blog-meta {
+            display: block;
+            font-size: 15px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 14px;
+        }
+
+        /* Title */
+        .blog-title {
+            font-size: 26px;
+            line-height: 1.35;
+            margin-bottom: 12px;
+        }
+
+        /* Paragraph */
+        .blog-content {
+            font-size: 16px;
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        .blog-image {
+            width: 100%;
+            max-width: 650px;
+            margin: 16px auto;
+        }
+
+        .logo-image {
+            max-width: 220px;
+        }
+
     }
 </style>
 

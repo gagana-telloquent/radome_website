@@ -5790,6 +5790,66 @@ body {
      /* Optional: semi-transparent background for better text readability */
     color: white; /* Ensure text is visible */
 }
+/* ================= MOBILE FIX FOR AI CORE CARDS ================= */
+@media (max-width:768px){
+
+/* Fix heading layout */
+.font-semibold{
+    display:block !important;
+    font-size:26px !important;
+    text-align:center;
+    line-height:1.3;
+}
+
+/* Fix small highlight text */
+.focus{
+    display:block !important;
+    text-align:center;
+    font-size:16px !important;
+}
+
+/* Fix AI Core title */
+.core{
+    display:block !important;
+    font-size:28px !important;
+    text-align:center;
+    line-height:1.3;
+}
+
+/* Fix solution paragraph */
+.solutions{
+    display:block !important;
+    text-align:center;
+    font-size:16px !important;
+    line-height:1.6;
+    padding:0 15px;
+}
+
+/* Fix card spacing */
+.image-bottom-card{
+    height:auto;
+    padding-bottom:20px;
+}
+
+/* Fix card content padding */
+.card-content{
+    padding:25px 20px;
+    text-align:center;
+}
+
+/* Image scaling */
+.image-bottom-card img{
+    width:100%;
+    height:auto;
+}
+
+/* Fix Krona font heading */
+.font-krona-one{
+    font-size:20px !important;
+    text-align:center;
+}
+
+}
 
 .card-content h2{
     color: #16213E!important;

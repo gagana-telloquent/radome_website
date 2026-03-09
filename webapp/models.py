@@ -286,7 +286,7 @@ class Industry(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     background_image = models.ImageField(upload_to="our_work/industries/")
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(unique=True, blank=True,max_length=255)
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
@@ -325,7 +325,7 @@ class AICoreCard(models.Model):
 class Product(models.Model):
     title = models.CharField(max_length=255)
     tagline = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(unique=True, blank=True, max_length=255)
 
     banner_image = models.ImageField(
         upload_to="our_work/products/banner/",
@@ -369,7 +369,7 @@ class ProductModuleIcon(models.Model):
 
 class UseCase(models.Model):
     title = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(unique=True, blank=True,max_length=255)
 
     banner_image = models.ImageField(
         upload_to="our_work/usecases/banner/",
@@ -621,7 +621,7 @@ class BlogAuthor(models.Model):
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(unique=True, blank=True,max_length=255)
 
     # SEO Fields
     meta_title = models.CharField(max_length=255, blank=True)
@@ -645,8 +645,14 @@ class BlogPost(models.Model):
     )
 
     created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+    published_at = models.DateTimeField(default=timezone.now)
     is_published = models.BooleanField(default=True)
 
+    def is_visible(self):
+        if self.is_published and self.published_at:
+            return self.published_at <= timezone.now()
+        return False
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
@@ -666,6 +672,7 @@ class BlogSection(models.Model):
         ("h3", "Sub Heading (H3 - Sub Section)"),
         ("paragraph", "Paragraph / Bullet List"),
         ("image", "Image"),
+        
     ]
 
     blog = models.ForeignKey(
@@ -687,6 +694,12 @@ class BlogSection(models.Model):
         blank=True,
         null=True
     )
+       # ADD THIS 👇
+    is_logo = models.BooleanField(
+        default=False,
+        help_text="Check this if the image is a company logo"
+    )
+
 
     order = models.PositiveIntegerField(default=0)
 

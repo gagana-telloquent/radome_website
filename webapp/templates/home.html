@@ -7,48 +7,39 @@
       .hero-section {
          position: relative;
          width: 100%;
-         height: 110vh;
+         height: 100vh;
          overflow: hidden;
          display: flex;
          align-items: center;
-         padding-left: 50px;
+         justify-content: flex-start;
+         padding-left: 80px;
          color: white;
       }
 
+      /* VIDEO */
       .hero-section video {
          position: absolute;
          top: 0;
          left: 0;
-         min-width: 90%;
-         min-height: 90%;
+         width: 100%;
+         height: 100%;
          object-fit: cover;
          z-index: 0;
-
-
       }
 
+      /* CONTENT */
       .hero-content {
          position: relative;
          z-index: 2;
-         max-width: 1000px;
-         margin-top: 100px;
-         margin-left: 50px;
-         padding: 20px 40px 20px 0;
-         background: rgba(0, 0, 0, 0.15);
-         border-radius: 12px;
-
+         max-width: 900px;
       }
 
+      /* TITLE */
       .hero-content h1 {
-         font-size: 65px;
+         font-size: 64px;
          line-height: 1.2;
-         margin: 0 0 10px 0;
-         text-transform: capitalize;
-         opacity: 0;
-         color: white;
-
-         transform: translateX(100%);
-         animation: slideIn 1s ease-out forwards;
+         margin-bottom: 15px;
+         color: #fff;
       }
 
       .hero-content h1:nth-child(2) {
@@ -56,15 +47,49 @@
          animation-delay: 0.5s;
       }
 
+      /* DESCRIPTION */
       .hero-content p {
          font-size: 22px;
          line-height: 1.5;
-         max-width: 800px;
-         opacity: 0;
-         animation: fadeIn 1s ease-out forwards;
-         animation-delay: 1.5s;
-         color: #fff;
-         background: none;
+         max-width: 650px;
+      }
+
+      /* ========================= TABLET ========================= */
+      @media (max-width: 900px) {
+         .hero-section {
+            padding-left: 30px;
+         }
+
+         .hero-content h1 {
+            font-size: 40px;
+         }
+
+         .hero-content p {
+            font-size: 18px;
+         }
+      }
+
+      /* ========================= MOBILE ========================= */
+      @media (max-width:600px) {
+         .hero-section {
+            padding: 120px 20px 40px;
+            align-items: flex-start;
+            height: auto;
+         }
+
+         .hero-content {
+            max-width: 100%;
+         }
+
+         .hero-content h1 {
+            font-size: 28px;
+            line-height: 1.3;
+         }
+
+         .hero-content p {
+            font-size: 14px;
+            line-height: 1.5;
+         }
       }
 
       @keyframes slideIn {
@@ -188,25 +213,25 @@
    </style>
    <!-- hero intro -->
 
-{% if intro %}
-<div class="container1">
+   {% if intro %}
+   <div class="container1">
 
-   <div class="image-section">
-      {% if intro.image %}
-      <img src="{{ intro.image.url }}" alt="Intro Image">
-      {% endif %}
+      <div class="image-section">
+         {% if intro.image %}
+         <img src="{{ intro.image.url }}" alt="Intro Image">
+         {% endif %}
+      </div>
+
+      <div class="text-section">
+         <ul data-aos="fade-up" data-aos-duration="3000" class="list-unstyled mt-4 row">
+            <p style="color: #030303; font-size: 20px; font-family: 'Inter', sans-serif;">
+               {{ intro.description|safe }}
+            </p>
+         </ul>
+      </div>
+
    </div>
-
-   <div class="text-section">
-      <ul data-aos="fade-up" data-aos-duration="3000" class="list-unstyled mt-4 row">
-         <p style="color: #030303; font-size: 20px; font-family: 'Inter', sans-serif;">
-            {{ intro.description|safe }}
-         </p>
-      </ul>
-   </div>
-
-</div>
-{% endif %}
+   {% endif %}
 
 
    <!-- stat -->
@@ -299,8 +324,7 @@
                   How We Add Value
                </h2>
 
-               <p class="value-description"
-                  style="color: #1ad8d3; font-family: 'Inter', sans-serif; font-weight: 600;">
+               <p class="value-description" style="color: #1ad8d3; font-family: 'Inter', sans-serif; font-weight: 600;">
                   We don't just deploy algorithms — we design outcomes.
                </p>
 
@@ -384,7 +408,7 @@
                      <div class="pbmit-tag-wrapper"></div>
                      <div class="pbmit-reel-title-wrap"></div>
 
-                     <div class="pbmit-video-wrapper">
+                     <div class="pbmit-video-wrapper desktop-video-wrapper">
                         {% if reel_video and reel_video.video %}
                         <video autoplay muted loop playsinline class="pbmit-reel-video" style="position: absolute;
               top: 0;
@@ -416,45 +440,15 @@
       </div>
    </section>
    <!-- Reel-video End -->
+   <div class="pbmit-video-wrapper mobile-video-wrapper">
 
-   <!-- Mobile View Video -->
-   <section class="pbmit-bg-color-blackish reel-video-wrapper overflow-hidden d-block d-lg-none">
-      <div class="container-fluid g-0">
-         <div class="pbmit-element-reel-video-style-1">
-            <div class="pbmit-element-inner">
-               <div class="pbmit-element-posts-wrapper">
-                  <div class="pbmit-reel-video-contant">
+      {% if reel_video %}
+      <video id="mobile-radome-video" autoplay muted loop playsinline>
+         <source src="{{ reel_video.video.url }}" type="video/mp4">
+      </video>
+      {% endif %}
 
-                     <div class="pbmit-video-wrapper" style="position: relative; padding-top: 56.25%; height: 0;">
-
-                        {% if reel_video and reel_video.video %}
-                        <video id="mobile-radome-video" autoplay muted loop playsinline style="position:absolute;
-                               top:0;
-                               left:0;
-                               width:100%;
-                               height:100%;
-                               z-index:1;
-                               object-fit:cover;
-                               background:#000;">
-                           <source src="{{ reel_video.video.url }}" type="video/mp4">
-                           Your browser does not support the video tag.
-                        </video>
-                        {% endif %}
-
-                     </div>
-                  </div>
-
-                  {% if reel_video and reel_video.video %}
-                  <a class="pbmit-link" href="{{ reel_video.video.url }}" target="_blank">
-                     Watch Full Video
-                  </a>
-                  {% endif %}
-
-               </div>
-            </div>
-         </div>
-      </div>
-   </section>
+   </div>
 
    <script>
       // Ensure autoplay works on iOS and Android after user gesture
@@ -485,26 +479,6 @@
          /* crop instead of stretch */
          flex-shrink: 0;
          /* optional – match original */
-      }
-
-      @media (max-width: 991.98px) {
-         .pbmit-video-wrapper {
-            position: relative !important;
-            padding-top: 56.25% !important;
-            height: 0 !important;
-            background: #000;
-         }
-
-         #mobile-radome-video {
-            position: absolute !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-            background: #000 !important;
-            display: block;
-         }
       }
    </style>
 
@@ -540,9 +514,9 @@
 
       </div>
 
-<a href="{% url 'insights' %}" class="view-button">
-    VIEW TEAM
-</a>
+      <a href="{% url 'insights' %}" class="view-button">
+         VIEW TEAM
+      </a>
 
       <br>
    </section>
@@ -584,6 +558,7 @@
       }
 
       @media (max-width: 768px) {
+
          .value-box {
             width: 100%;
             max-width: 300px;
@@ -1050,6 +1025,15 @@ Achievement Highlight Section -->
             height: 200px;
             object-fit: cover;
          }
+/* MOBILE TEXT FIX */
+.container1 .text-section p{
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    word-break: normal;
+    overflow-wrap: break-word;
+    line-height: 1.7;
+}
 
          .stats-grid {
             display: flex;
@@ -1073,7 +1057,6 @@ Achievement Highlight Section -->
          }
 
          .section-lgt img {
-            width: 100% !important;
             height: auto !important;
             margin-top: 20px !important;
          }
@@ -1140,6 +1123,57 @@ Achievement Highlight Section -->
             min-width: 0;
          }
       }
+
+
+      /* =========================
+   DESKTOP VIDEO
+========================= */
+
+      .desktop-video-wrapper {
+         position: relative;
+         width: 100%;
+         height: 600px;
+         overflow: hidden;
+      }
+
+      .desktop-video-wrapper video {
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+      }
+
+
+      /* =========================
+   MOBILE VIDEO
+========================= */
+      @media (max-width:991px) {
+
+         .mobile-video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 260px;
+            overflow: hidden;
+         }
+
+         .mobile-video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 5;
+         }
+
+         /* remove theme overlay */
+         .mobile-video-wrapper::after {
+            display: none !important;
+         }
+
+      }
    </style>
 
    <script>
@@ -1161,7 +1195,7 @@ Achievement Highlight Section -->
       })();
    </script>
 
-   
+
 
    <!-- Page Content End -->
 

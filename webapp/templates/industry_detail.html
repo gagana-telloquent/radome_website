@@ -226,6 +226,115 @@
                 text-justify: inter-word;
                 /* improves spacing */
             }
+            .post-image img{
+    width:100%;
+    height:auto;
+    border-radius:12px;
+}
+
+.post-image{
+    margin:30px 0;
+}
+@media (max-width:768px){
+
+.post-image{
+    margin:20px 0;
+}
+
+.post-image img{
+    width:100%;
+    border-radius:10px;
+}
+
+}
+@media (max-width:768px){
+
+.highlight-box{
+    padding:25px 20px;
+    font-size:16px;
+    border-radius:18px;
+    line-height:1.7;
+}
+
+}
+@media (max-width:768px){
+
+.page-single-post h2{
+    font-size:28px !important;
+    line-height:1.3;
+}
+
+}
+@media (max-width:768px){
+
+.post-entry p{
+    font-size:16px !important;
+    line-height:1.7;
+    text-align:justify;
+}
+
+}
+@media (max-width:768px){
+
+.hero-section{
+    margin:40px auto;
+}
+
+.hero-section h2{
+    font-size:26px;
+}
+
+.text-container p{
+    font-size:16px;
+}
+
+.cta-button{
+    font-size:15px;
+    padding:12px 22px;
+}
+
+}
+/* Disable animation wrappers on mobile only */
+@media (max-width:768px){
+
+.post-image figure{
+    margin:0;
+}
+
+.image-anime,
+.reveal{
+    animation:none !important;
+    transform:none !important;
+    opacity:1 !important;
+}
+
+.post-image img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:10px;
+}
+
+}
+/* ===== FIX INTRO IMAGE DISAPPEARING ON MOBILE ===== */
+@media (max-width:768px){
+
+.image-anime,
+.reveal{
+    opacity:1 !important;
+    transform:none !important;
+    animation:none !important;
+    visibility:visible !important;
+}
+
+.image-anime img,
+.reveal img{
+    opacity:1 !important;
+    transform:none !important;
+}
+
+}
+
         </style>
 
         {% if detail and detail.highlight_text %}
